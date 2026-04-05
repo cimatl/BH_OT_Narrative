@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>BH W6 Pre-Class v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f7f5f0;--s:#fff;--s2:#f0ede6;--ink:#1a1814;--ink2:#5a5650;--ink3:#9a958e;--ac:#2a4a8a;--acl:#e8edf8;--go:#b07830;--gol:#fdf3e3;--gr:#2a6a4a;--grl:#e8f5ee;--re:#8a2a2a;--rel:#fceaea;--pu:#5a2a8a;--pul:#f0e8f8;--bd:rgba(26,24,20,.1);--r:9px;
+--c-fee:#2a4a8a;--c-osb:#5a3a0a;--c-ci:#1a5a4a;--c-fm:#5a2a8a;--c-sl:#8a2a5a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.65}
+.hdr{background:var(--ink);color:#f7f5f0;padding:0 16px;height:47px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.ht{font-family:'Libre Baskerville',serif;font-size:12.5px;font-weight:700}
+.lb{background:rgba(247,245,240,.1);border:1px solid rgba(247,245,240,.2);color:#f7f5f0;padding:3px 8px;border-radius:5px;cursor:pointer;font:inherit;font-size:11px;margin-left:4px}
+.lb.on{background:rgba(247,245,240,.25)}
+.tbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 12px;display:flex;gap:1px;overflow-x:auto;scrollbar-width:none;position:sticky;top:47px;z-index:40}
+.tbar::-webkit-scrollbar{display:none}
+.tb{padding:8px 11px;border:none;background:none;cursor:pointer;font:inherit;font-size:11.5px;color:var(--ink2);border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.tb.on{color:var(--ac);border-bottom-color:var(--ac);font-weight:500}
+.tdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.main{padding:16px;max-width:900px}
+.panel{display:none}.panel.on{display:block}
+.ac{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:9px;overflow:hidden}
+.ah{padding:10px 13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:var(--s2);user-select:none}
+.as{font-size:9px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--ink3);margin-bottom:2px}
+.at{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700;color:var(--ink)}
+.atog{font-size:13px;color:var(--ink3);transition:transform .2s;flex-shrink:0;margin-left:8px}
+.ab{padding:13px;display:none}
+.ac.op .ab{display:block}
+.ac.op .atog{transform:rotate(180deg)}
+.sub{border:1px solid var(--bd);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.sh{padding:8px 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:rgba(247,245,240,.5)}
+.sh-t{font-size:12px;font-weight:600;color:var(--ac)}
+.sh-a{font-size:11px;color:var(--ink3);transition:transform .2s;margin-left:6px;flex-shrink:0}
+.sb{padding:11px 12px;display:none}
+.sub.op .sb{display:block}
+.sub.op .sh-a{transform:rotate(90deg)}
+.txh{border-radius:var(--r);padding:13px 15px;margin-bottom:12px;color:#f7f5f0}
+.txr{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;margin-bottom:2px}
+.txs{font-size:11.5px;color:rgba(247,245,240,.6);line-height:1.5}
+.ms{font-size:13px;line-height:1.85;color:var(--ink)}
+.ms h3{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;margin:13px 0 5px}
+.ms h3:first-child{margin-top:0}
+.ms h4{font-size:13px;font-weight:600;margin:10px 0 4px;color:var(--ac)}
+.ms p{margin-bottom:8px}
+.ms .sc{display:inline-block;padding:1px 7px;background:var(--s2);border-radius:4px;font-size:11px;font-weight:600;color:var(--ac)}
+.ms .fm{display:inline-block;padding:1px 7px;background:var(--pul);border-radius:4px;font-size:11px;font-weight:600;color:var(--pu)}
+.ms .j1{display:inline-block;padding:1px 7px;background:var(--rel);border-radius:4px;font-size:11px;font-weight:600;color:var(--re)}
+.ms .j2{display:inline-block;padding:1px 7px;background:var(--gol);border-radius:4px;font-size:11px;font-weight:600;color:var(--go)}
+.ms .j3{display:inline-block;padding:1px 7px;background:var(--pul);border-radius:4px;font-size:11px;font-weight:600;color:var(--pu)}
+.ol-row{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--bd)}
+.ol-row:last-child{border-bottom:none}
+.ol-v{font-size:11px;font-weight:700;color:var(--ac);min-width:90px;flex-shrink:0;padding-top:2px}
+.ol-c{font-size:12.5px;color:var(--ink);line-height:1.6}
+.pr-row{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--bd)}
+.pr-row:last-child{border-bottom:none}
+.pr-n{font-size:10px;font-weight:700;color:#f7f5f0;background:var(--ac);padding:2px 7px;border-radius:4px;flex-shrink:0;white-space:nowrap;margin-top:2px;height:fit-content}
+.pr-n.osb{background:var(--c-osb)}
+.pr-t{font-size:12.5px;color:var(--ink);line-height:1.65}
+.err-row{padding:8px 10px;background:var(--s2);border-radius:7px;margin-bottom:6px}
+.err-row:last-child{margin-bottom:0}
+.err-name{font-size:12px;font-weight:700;color:var(--re);margin-bottom:2px}
+.err-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+.th-card{padding:9px 11px;background:var(--s2);border-radius:7px;margin-bottom:6px}
+.th-card:last-child{margin-bottom:0}
+.th-t{font-size:12px;font-weight:700;color:var(--ac);margin-bottom:2px}
+.th-t.osb{color:var(--c-osb)}
+.th-d{font-size:12px;color:var(--ink2);line-height:1.6}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:9px 0}
+.igb{border-radius:var(--r);padding:10px 12px;border:1px solid;font-size:12.5px;color:var(--ink);line-height:1.7}
+.igb.fee{background:var(--acl);border-color:rgba(42,74,138,.2)}
+.igb.osb{background:var(--gol);border-color:rgba(176,120,48,.2)}
+.igl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.igb.fee .igl{color:var(--ac)}.igb.osb .igl{color:var(--go)}
+.fm-sec{background:var(--pul);border:1px solid rgba(90,42,138,.2);border-radius:var(--r);padding:12px 14px;margin-bottom:10px}
+.fm-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--pu);margin-bottom:6px}
+.fm-t{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.fm-content{font-size:13px;color:var(--ink);line-height:1.8}
+.fm-content p{margin-bottom:8px}
+.jcat{display:flex;gap:7px;margin:10px 0;flex-wrap:wrap}
+.jc{padding:6px 11px;border-radius:7px;font-size:12px;line-height:1.55;flex:1;min-width:200px}
+.jc.c1{background:var(--rel);border:1px solid rgba(138,42,42,.2)}
+.jc.c2{background:var(--gol);border:1px solid rgba(176,120,48,.2)}
+.jc.c3{background:var(--pul);border:1px solid rgba(90,42,138,.2)}
+.jc-l{font-size:10px;font-weight:700;display:block;margin-bottom:3px}
+.jc.c1 .jc-l{color:var(--re)}.jc.c2 .jc-l{color:var(--go)}.jc.c3 .jc-l{color:var(--pu)}
+.triad{display:flex;gap:7px;margin:9px 0}
+.tr-b{flex:1;padding:9px 11px;border-radius:var(--r)}
+.tr-b.wh{background:var(--acl);border:1px solid rgba(42,74,138,.2)}
+.tr-b.wh2{background:var(--grl);border:1px solid rgba(42,106,74,.2)}
+.tr-b.wt{background:var(--gol);border:1px solid rgba(176,120,48,.2)}
+.tr-k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:3px}
+.tr-b.wh .tr-k{color:var(--ac)}.tr-b.wh2 .tr-k{color:var(--gr)}.tr-b.wt .tr-k{color:var(--go)}
+.tr-v{font-size:12.5px;color:var(--ink);line-height:1.6}
+.fs-card{background:var(--ink);border-radius:var(--r);padding:12px 14px;margin-bottom:9px}
+.fs-l{font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;color:rgba(247,245,240,.45);margin-bottom:4px}
+.fs-content{font-size:13px;color:#f7f5f0;line-height:1.75}
+textarea{width:100%;padding:7px 10px;border:1px solid var(--bd);border-radius:7px;font:inherit;font-size:12.5px;resize:vertical;min-height:60px;background:var(--s2)}
+textarea.dk{background:rgba(247,245,240,.08)!important;color:#f7f5f0!important;border-color:rgba(247,245,240,.2)!important}
+.aib{background:var(--gol);border:1px solid rgba(176,120,48,.3);border-radius:var(--r);padding:9px 11px;margin-bottom:10px}
+.ait{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--go);margin-bottom:2px}
+.aix{font-size:12.5px;color:var(--ink2);line-height:1.6}
+.mc{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:11px;margin-bottom:10px}
+.mn{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:3px}
+.mq{font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:9px}
+.mo{display:flex;align-items:flex-start;gap:7px;padding:6px 10px;border:1px solid var(--bd);border-radius:7px;cursor:pointer;font-size:12.5px;color:var(--ink2);background:var(--s2);margin-bottom:4px}
+.mo:hover{background:var(--acl);border-color:rgba(42,74,138,.2)}
+.mo.sel{background:var(--acl);border-color:rgba(42,74,138,.4)}
+.mo.cor{background:var(--grl);border-color:rgba(42,106,74,.3);color:var(--gr)}
+.mo.wrg{background:rgba(138,42,42,.08);border-color:rgba(138,42,42,.2);color:var(--re)}
+.ol-l{font-weight:700;flex-shrink:0;width:16px}
+.ex{display:none;margin-top:6px;padding:6px 9px;background:var(--s2);border-radius:6px;font-size:12px;color:var(--ink2);line-height:1.6}
+.ex.sh{display:block}
+.sbtn{padding:7px 16px;background:var(--ac);color:#f7f5f0;border:none;border-radius:7px;cursor:pointer;font:inherit;font-size:12.5px;font-weight:500}
+.rbtn{padding:7px 12px;background:var(--s2);color:var(--ink);border:1px solid var(--bd);border-radius:7px;cursor:pointer;font:inherit;font-size:12.5px;margin-left:6px}
+.sc-d{display:none;margin-top:11px;padding:9px 11px;background:var(--s2);border-radius:var(--r);font-size:13.5px;text-align:center}
+.sc-d.sh{display:block}
+.ko-loading{padding:14px;text-align:center;color:var(--ink3);font-size:12.5px;font-style:italic}
+.ko-err{padding:10px;background:var(--rel);border-radius:var(--r);font-size:12px;color:var(--re)}
+.en-s,.ko-s{}
+@media(max-width:600px){.ig{grid-template-columns:1fr}.triad{flex-direction:column}.jcat{flex-direction:column}}
+
+.lang-en-only,.lang-ko-only{}
+</style>
+</head>
+<body>
+<header class="hdr">
+<div style="display:flex;align-items:center;gap:8px">
+<span class="ht"><span class="en-s">Biblical Hermeneutics — Week 6</span><span class="ko-s" style="display:none">성서해석학 — 6주차</span></span>
+<span style="font-size:10px;color:rgba(247,245,240,.4)"><span class="en-s">GEK20070-01 · Adaptive Pre-Class</span><span class="ko-s" style="display:none">GEK20070-01 · 적응형 수업 전 학습</span></span>
+</div>
+<div>
+<button class="lb on" id="bEn" onclick="setLang('en')"><span class="en-s">English</span><span class="ko-s" style="display:none">영어</span></button>
+<button class="lb" id="bKo" onclick="setLang('ko')"><span class="en-s">한국어</span><span class="ko-s" style="display:none">한국어</span></button>
+</div>
+</header>
+<div class="tbar">
+<button class="tb on" onclick="showTab('ori')"><span class="en-s">Orientation</span><span class="ko-s" style="display:none">안내</span></button>
+<button class="tb" onclick="showTab('fee')"><span class="tdot" style="background:var(--c-fee)"></span><span class="en-s"><span class="en-s">Fee &amp; Stuart</span><span class="ko-s" style="display:none">Fee &amp; Stuart</span></span><span class="ko-s" style="display:none"><span class="en-s">Fee &amp; Stuart</span><span class="ko-s" style="display:none">Fee &amp; Stuart</span></span></button>
+<button class="tb" onclick="showTab('osb')"><span class="tdot" style="background:var(--c-osb)"></span><span class="en-s"><span class="en-s">Osbourne</span><span class="ko-s" style="display:none">Osbourne</span></span><span class="ko-s" style="display:none"><span class="en-s">Osbourne</span><span class="ko-s" style="display:none">Osbourne</span></span></button>
+<button class="tb" onclick="showTab('ci')"><span class="tdot" style="background:var(--c-ci)"></span><span class="en-s">Comparison</span><span class="ko-s" style="display:none">비교</span></button>
+<button class="tb" onclick="showTab('fm')"><span class="tdot" style="background:var(--c-fm)"></span><span class="en-s">Formation</span><span class="ko-s" style="display:none">형성</span></button>
+<button class="tb" onclick="showTab('cl')"><span class="en-s">Checklist</span><span class="ko-s" style="display:none">체크리스트</span></button>
+<button class="tb" onclick="showTab('mcq')"><span class="en-s">MCQ</span><span class="ko-s" style="display:none">객관식</span></button>
+</div>
+<div class="main">
+<!-- ORIENTATION -->
+<div class="panel on" id="panel-ori">
+<div style="background:var(--ink);color:#f7f5f0;border-radius:var(--r);padding:14px 16px;margin-bottom:13px">
+<div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,245,240,.4);margin-bottom:2px"><span class="en-s">Week 6 · GEK20070-01 · Handong 2026</span><span class="ko-s" style="display:none">6주차 · GEK20070-01 · Handong 2026</span></div>
+<div style="font-family:'Libre Baskerville',serif;font-size:19px;font-weight:700;margin-bottom:2px"><span class="en-s">OT Narrative: Its Proper Use</span><span class="ko-s" style="display:none">구약 내러티브: 그 올바른 사용</span></div>
+<div style="font-size:11.5px;color:rgba(247,245,240,.55)"><span class="en-s">Primary: Fee &amp; Stuart · Secondary: Osbourne · Formation: MetaArchitect v6.5.0</span><span class="ko-s" style="display:none">주교재: Fee &amp; Stuart · 부교재: Osbourne · 형성 원고: MetaArchitect v6.5.0</span></div>
+</div>
+<div class="ac op"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">This Week's Focus</span><span class="ko-s" style="display:none">이번 주 초점</span></div><div class="at"><span class="en-s">What this Adaptive Pre-Class app covers</span><span class="ko-s" style="display:none">이 적응형 수업 전 앱이 다루는 내용</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<p class="ms"><span class="en-s">This app prepares you to enter in-class discussion of <strong>six OT narrative texts</strong> — not by analyzing those texts yet, but by mastering the <strong>hermeneutical frameworks</strong> you will apply to them.</span><span class="ko-s" style="display:none">이 앱은 <strong>여섯 개의 구약 내러티브 본문</strong>에 대한 수업 중 토론으로 들어가도록 준비시켜 줍니다. 아직 본문 자체를 분석하는 것이 아니라, 그 본문들에 적용할 <strong>해석학적 틀</strong>을 먼저 숙달하도록 돕는 것이 목적입니다.</span></p>
+<p class="ms"><span class="en-s">Before applying method, you must understand method. Before using Fee &amp; Stuart and Osbourne in class, you must have genuinely read them. This app is built around the two textbooks — not around the biblical texts themselves. The six biblical texts (Genesis 22, Judges 4, Ruth 1, 2 Samuel 11, 1 Kings 18, Genesis 50) are the material of the <strong>Active Learning (in-class) app</strong>.</span><span class="ko-s" style="display:none">방법을 적용하기 전에 먼저 방법 자체를 이해해야 합니다. 수업에서 Fee &amp; Stuart와 Osbourne을 사용하기 전에 반드시 실제로 읽어야 합니다. 이 앱은 성경 본문 자체보다 <strong>두 교재의 해석 틀</strong>을 중심으로 구성되어 있습니다. 여섯 개의 성경 본문(창 22장, 삿 4장, 룻 1장, 삼하 11장, 왕상 18장, 창 50장)은 <strong>수업 중 액티브 러닝 앱</strong>에서 다룹니다.</span></p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:11px 0">
+<div style="background:var(--acl);border:1px solid rgba(42,74,138,.2);border-radius:var(--r);padding:10px"><div style="font-size:10px;font-weight:700;color:var(--c-fee);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px"><span class="en-s"><span class="en-s">Fee &amp; Stuart</span><span class="ko-s" style="display:none">Fee &amp; Stuart</span></span><span class="ko-s" style="display:none"><span class="en-s">Fee &amp; Stuart</span><span class="ko-s" style="display:none">Fee &amp; Stuart</span></span></div><div style="font-size:12px"><span class="en-s">What narratives are · Three levels · God as protagonist · 10 principles · 9 common errors</span><span class="ko-s" style="display:none">내러티브의 본질 · 세 수준 · 하나님이 주인공 · 10가지 원칙 · 9가지 일반적 오류</span></div></div>
+<div style="background:var(--gol);border:1px solid rgba(176,120,48,.2);border-radius:var(--r);padding:10px"><div style="font-size:10px;font-weight:700;color:var(--c-osb);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px"><span class="en-s"><span class="en-s">Osbourne</span><span class="ko-s" style="display:none">Osbourne</span></span><span class="ko-s" style="display:none"><span class="en-s">Osbourne</span><span class="ko-s" style="display:none">Osbourne</span></span></div><div style="font-size:12px"><span class="en-s">Narrative criticism · Plot · Point of view · Characterization · Literary devices · 7-step method</span><span class="ko-s" style="display:none">내러티브 비평 · 플롯 · 관점 · 인물화 · 문학적 장치 · 7단계 방법</span></div></div>
+<div style="background:var(--pul);border:1px solid rgba(90,42,138,.2);border-radius:var(--r);padding:10px"><div style="font-size:10px;font-weight:700;color:var(--pu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px"><span class="en-s">Formation</span><span class="ko-s" style="display:none">형성</span></div><div style="font-size:12px">MetaArchitect v6.5.0 · WHERE-WHO-WHAT · <span class="en-s">Matrix Space · Future Self Protocol</span><span class="ko-s" style="display:none">매트릭스 공간 · 미래 자기 프로토콜</span></div></div>
+</div>
+<div class="aib"><div class="ait"><span class="en-s">AI Brake</span><span class="ko-s" style="display:none">AI 브레이크</span></div><div class="aix"><span class="en-s">Complete all pre-class readings before engaging this app. This app supplements Fee &amp; Stuart and Osbourne — it does not replace them. Complete the Checklist outputs before class.</span><span class="ko-s" style="display:none">이 앱을 사용하기 전에 수업 전 읽기를 모두 마치십시오. 이 앱은 Fee &amp; Stuart와 Osbourne을 보완할 뿐, 대체하지 않습니다. 수업 전에 체크리스트 산출물을 완료하십시오.</span></div></div>
+</div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Five-Step Interpretive Flow</span><span class="ko-s" style="display:none">5단계 해석 흐름</span></div><div class="at"><span class="en-s">Applied to all six texts in the Active Learning session</span><span class="ko-s" style="display:none">수업 중 액티브 러닝의 여섯 본문 모두에 적용됨</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<p class="ms" style="margin-bottom:10px"><span class="en-s">This course integrates Fee &amp; Stuart and Osbourne into a five-step interpretive sequence. You will apply this to each biblical text in the in-class app.</span><span class="ko-s" style="display:none">이 과목은 Fee &amp; Stuart와 Osbourne을 다섯 단계의 해석 순서로 통합합니다. 수업 중 앱에서 이 흐름을 각 성경 본문에 적용하게 됩니다.</span></p>
+<div style="display:flex;flex-direction:column;gap:7px">
+<div style="display:flex;gap:8px;align-items:center;padding:8px 11px;background:var(--s2);border-radius:var(--r);border:1px solid var(--bd)"><div style="background:#2a4a8a;color:#f7f5f0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;flex-shrink:0"><span class="en-s">Situation</span><span class="ko-s" style="display:none">상황</span></div><div style="font-size:12.5px;color:var(--ink2)"><span class="en-s">Who wrote this? When? For whom? What world does the text inhabit? — Historical, cultural, canonical context</span><span class="ko-s" style="display:none">누가 썼는가? 언제 썼는가? 누구를 향해 썼는가? 본문이 살고 있는 세계는 무엇인가? — 역사적·문화적·정경적 맥락</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;padding:8px 11px;background:var(--s2);border-radius:var(--r);border:1px solid var(--bd)"><div style="background:#6a3a1a;color:#f7f5f0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;flex-shrink:0"><span class="en-s">Form</span><span class="ko-s" style="display:none">형식</span></div><div style="font-size:12.5px;color:var(--ink2)"><span class="en-s">What kind of narrative? What literary devices — type-scene, gap, Leitwort, repetition, dialogue, irony, chiasm? (Osbourne)</span><span class="ko-s" style="display:none">어떤 종류의 내러티브인가? 어떤 문학적 장치가 사용되는가 — 유형 장면, 빈틈, Leitwort, 반복, 대화, 아이러니, 교차 배열? (Osbourne)</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;padding:8px 11px;background:var(--s2);border-radius:var(--r);border:1px solid var(--bd)"><div style="background:#8a2a5a;color:#f7f5f0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;flex-shrink:0"><span class="en-s">Flow</span><span class="ko-s" style="display:none">흐름</span></div><div style="font-size:12.5px;color:var(--ink2)"><span class="en-s">Map the scenes. Where is the conflict? The climax? What does the plot structure communicate? (Osbourne)</span><span class="ko-s" style="display:none">장면을 지도처럼 그려 보라. 갈등은 어디에 있는가? 절정은 어디인가? 플롯 구조는 무엇을 전달하는가? (Osbourne)</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;padding:8px 11px;background:var(--s2);border-radius:var(--r);border:1px solid var(--bd)"><div style="background:#1a5a4a;color:#f7f5f0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;flex-shrink:0"><span class="en-s">Force</span><span class="ko-s" style="display:none">힘</span></div><div style="font-size:12.5px;color:var(--ink2)"><span class="en-s">What is the text doing? What claim does it make about YHWH, Israel, humanity, the covenant? Where do Fee &amp; Stuart and Osbourne converge or diverge on this text?</span><span class="ko-s" style="display:none">이 본문은 무엇을 하고 있는가? YHWH, 이스라엘, 인간, 언약에 대해 어떤 주장을 하는가? 이 본문에서 Fee &amp; Stuart와 Osbourne은 어디에서 만나는가, 어디에서 갈라지는가?</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;padding:8px 11px;background:var(--s2);border-radius:var(--r);border:1px solid var(--bd)"><div style="background:#3a2a7a;color:#f7f5f0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;flex-shrink:0"><span class="en-s">Faithful Embodiment</span><span class="ko-s" style="display:none">신실한 구현</span></div><div style="font-size:12.5px;color:var(--ink2)"><span class="en-s">Not "what should I do like the character?" but "what does this narrative claim about God that forms the community today?" (Fee &amp; Stuart)</span><span class="ko-s" style="display:none">"이 인물처럼 내가 무엇을 해야 하는가?"가 아니라, "오늘 공동체를 형성하는 하나님에 대해 이 내러티브가 무엇을 주장하는가?"를 묻는다. (Fee &amp; Stuart)</span></div></div>
+</div>
+</div></div>
+</div>
+<!-- FEE & STUART -->
+<div class="panel" id="panel-fee">
+<div class="txh" style="background:var(--c-fee)">
+<div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,245,240,.45);margin-bottom:2px"><span class="en-s">Primary Textbook · Fee &amp; Stuart</span><span class="ko-s" style="display:none">주교재 · Fee &amp; Stuart</span></div>
+<div class="txr"><span class="en-s">How to Read the Bible for All It's Worth</span><span class="ko-s" style="display:none">성경을 제대로 읽기</span></div>
+<div class="txs"><span class="en-s">Chapter 5 — Old Testament Narratives: Their Proper Use</span><span class="ko-s" style="display:none">5장 — 구약 내러티브: 그 올바른 사용</span></div>
+</div>
+<div class="ac op"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Academic Manuscript</span><span class="ko-s" style="display:none">학술 원고</span></div><div class="at"><span class="en-s">Fee &amp; Stuart's Chapter on OT Narrative</span><span class="ko-s" style="display:none">Fee &amp; Stuart의 구약 내러티브 장</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<div class="sub op lang-en-only"><div class="sh" onclick="togSub(this)"><span class="sh-t"><span class="en-s"><span class="en-s">English Manuscript</span><span class="ko-s" style="display:none">영문 원고</span></span><span class="ko-s" style="display:none">영문 원고</span></span><span class="sh-a">▶</span></div>
+<div class="sb"><div class="ms" id="ms-fee-en"></div></div></div>
+<div class="sub lang-ko-only"><div class="sh" onclick="togSub(this)"><span class="sh-t"><span class="en-s">Korean Translation — Fee &amp; Stuart</span><span class="ko-s" style="display:none">한국어 번역 — 피 &amp; 스튜어트</span></span><span class="sh-a">▶</span></div>
+<div class="sb"><div id="ms-fee-ko"></div></div></div>
+</div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Chapter Structure</span><span class="ko-s" style="display:none">챕터 구조</span></div><div class="at"><span class="en-s">Outline of Fee &amp; Stuart's Chapter</span><span class="ko-s" style="display:none">Fee &amp; Stuart 장의 개요</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="ol-fee"></div></div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">10 Principles</span><span class="ko-s" style="display:none">10가지 원칙</span></div><div class="at"><span class="en-s">Fee &amp; Stuart's Principles for Interpreting OT Narrative</span><span class="ko-s" style="display:none">Fee &amp; Stuart의 구약 내러티브 해석 원칙</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="pr-fee"></div></div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">9 Common Errors</span><span class="ko-s" style="display:none">9가지 일반적 오류</span></div><div class="at"><span class="en-s">What NOT to do when reading OT Narrative</span><span class="ko-s" style="display:none">구약 내러티브를 읽을 때 하지 말아야 할 것</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="err-fee"></div></div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Key Themes</span><span class="ko-s" style="display:none">주요 주제</span></div><div class="at"><span class="en-s">Fee &amp; Stuart's Thematic Emphases</span><span class="ko-s" style="display:none">Fee &amp; Stuart의 핵심 주제 강조점</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="th-fee"></div></div></div>
+</div>
+<!-- OSBOURNE -->
+<div class="panel" id="panel-osb">
+<div class="txh" style="background:var(--c-osb)">
+<div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,245,240,.45);margin-bottom:2px"><span class="en-s">Secondary Textbook · Osbourne</span><span class="ko-s" style="display:none">부교재 · Osbourne</span></div>
+<div class="txr"><span class="en-s">The Hermeneutical Spiral</span><span class="ko-s" style="display:none">해석학적 나선형</span></div>
+<div class="txs"><span class="en-s">Chapter 7 — Narrative</span><span class="ko-s" style="display:none">7장 — 내러티브</span></div>
+</div>
+<div class="ac op"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Academic Manuscript</span><span class="ko-s" style="display:none">학술 원고</span></div><div class="at"><span class="en-s">Osbourne's Chapter on Narrative Hermeneutics</span><span class="ko-s" style="display:none">Osbourne의 내러티브 해석학 장</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<div class="sub op lang-en-only"><div class="sh" onclick="togSub(this)"><span class="sh-t"><span class="en-s">English Manuscript</span><span class="ko-s" style="display:none">영문 원고</span></span><span class="sh-a">▶</span></div>
+<div class="sb"><div class="ms" id="ms-osb-en"></div></div></div>
+<div class="sub lang-ko-only"><div class="sh" onclick="togSub(this)"><span class="sh-t"><span class="en-s">Korean Translation — Osbourne</span><span class="ko-s" style="display:none">한국어 번역 — 오스본</span></span><span class="sh-a">▶</span></div>
+<div class="sb"><div id="ms-osb-ko"></div></div></div>
+</div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Chapter Structure</span><span class="ko-s" style="display:none">챕터 구조</span></div><div class="at"><span class="en-s">Outline of Osbourne's Chapter</span><span class="ko-s" style="display:none">Osbourne 장의 개요</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="ol-osb"></div></div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">7-Step Method</span><span class="ko-s" style="display:none">7단계 방법</span></div><div class="at"><span class="en-s">Osbourne's Method for Studying Narrative Texts</span><span class="ko-s" style="display:none">Osbourne의 내러티브 연구 방법</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="method-osb"></div></div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Literary Devices</span><span class="ko-s" style="display:none">문학적 장치</span></div><div class="at"><span class="en-s">Osbourne's Analytical Tools</span><span class="ko-s" style="display:none">Osbourne의 분석 도구</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="dev-osb"></div></div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Key Themes</span><span class="ko-s" style="display:none">주요 주제</span></div><div class="at"><span class="en-s">Osbourne's Thematic Emphases</span><span class="ko-s" style="display:none">Osbourne의 핵심 주제 강조점</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div id="th-osb"></div></div></div>
+</div>
+<!-- COMPARATIVE INTEGRATION -->
+<div class="panel" id="panel-ci">
+<div class="txh" style="background:var(--c-ci)">
+<div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,245,240,.45);margin-bottom:2px"><span class="en-s">Comparative Integration</span><span class="ko-s" style="display:none">비교 통합</span></div>
+<div class="txr"><span class="en-s">Fee &amp; Stuart vs Osbourne</span><span class="ko-s" style="display:none">Fee &amp; Stuart와 Osbourne</span></div>
+<div class="txs"><span class="en-s">How the two frameworks converge and diverge on OT narrative</span><span class="ko-s" style="display:none">두 틀이 구약 내러티브 해석에서 어떻게 만나고 갈라지는가</span></div>
+</div>
+<div class="ac op"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Side-by-Side Overview</span><span class="ko-s" style="display:none">나란히 보기</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<div class="ig">
+<div class="igb fee"><div class="igl"><span class="en-s">Fee &amp; Stuart</span><span class="ko-s" style="display:none">Fee &amp; Stuart</span></div><span class="en-s"><strong>Primary concern:</strong> Protecting the reader from misreading. Structured defensively — most space on what NOT to do.<br/><br/><strong>Governing axiom:</strong> "Do not be a monkey-see-monkey-do reader." Narratives record what happened, not what should happen. They illustrate; they do not directly teach doctrine.<br/><br/><strong>Register:</strong> Accessible, pastoral, protective. Designed for general Bible readers and students at all levels.</span><span class="ko-s" style="display:none"><strong>주된 관심:</strong> 독자를 오독으로부터 보호하는 것. 구조는 방어적이며, 무엇을 하지 말아야 하는지에 많은 지면을 둡니다.<br/><br/><strong>지배 원리:</strong> “보고 따라 하는 독자가 되지 말라.” 내러티브는 일어난 일을 기록하지, 일어나야 할 일을 직접 명령하지 않습니다. 내러티브는 예시하지만 교리를 직접 가르치지는 않습니다.<br/><br/><strong>문체적 성격:</strong> 접근 가능하고 목회적이며 보호적입니다. 일반 성경 독자와 다양한 수준의 학생을 위해 쓰였습니다.</span></div>
+<div class="igb osb"><div class="igl"><span class="en-s">Osbourne</span><span class="ko-s" style="display:none">Osbourne</span></div><span class="en-s"><strong>Primary concern:</strong> Unlocking the literary artistry of the text. Constructive — provides a method for reading HOW narrative works.<br/><br/><strong>Governing axiom:</strong> Narrative is "art" or "poetry" — meaning found in the whole text, not isolated segments. Poetics (how constructed) leads to meaning (what communicated).<br/><br/><strong>Register:</strong> Technical, graduate-level, constructive. Designed for scholars and serious exegetes.</span><span class="ko-s" style="display:none"><strong>주된 관심:</strong> 본문의 문학적 예술성을 여는 것. 구조는 건설적이며, 내러티브가 <em>어떻게</em> 작동하는지 읽는 방법을 제공합니다.<br/><br/><strong>지배 원리:</strong> 내러티브는 “예술” 혹은 “시”이며, 의미는 고립된 단락이 아니라 전체 본문 안에서 발견됩니다. 시학(어떻게 구성되었는가)이 의미(무엇을 전달하는가)로 이어집니다.<br/><br/><strong>문체적 성격:</strong> 기술적이고 대학원 수준이며 건설적입니다. 연구자와 진지한 주해자를 위해 쓰였습니다.</span></div>
+</div>
+</div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Convergences</span><span class="ko-s" style="display:none">수렴점</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<p class="ms"><span class="en-s">Both scholars agree on five foundational points: (1) OT narrative is historical, not pure fiction. (2) God is the central actor in every biblical narrative — characters are secondary. (3) Characters are complex — not primarily moral exemplars to imitate. (4) The text must be read holistically — context always governs individual passages. (5) Narrative communicates theology, but not in the same way as propositional statements — the mode of communication matters.</span><span class="ko-s" style="display:none">두 학자는 다섯 가지 기초 지점에서 일치합니다. (1) 구약 내러티브는 순수 허구가 아니라 역사적 성격을 지닌다. (2) 모든 성경 내러티브의 중심 행위자는 하나님이며, 인물들은 그 다음 자리에 놓인다. (3) 인물들은 단순한 도덕적 모범이 아니라 복합적이다. (4) 본문은 전체적으로 읽혀야 하며, 개별 구절은 항상 문맥의 지배를 받는다. (5) 내러티브도 신학을 전달하지만, 명제적 진술과 동일한 방식으로 전달하지는 않는다. 전달 방식 자체가 중요하다.</span></p>
+</div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Divergences</span><span class="ko-s" style="display:none">분기점</span></div></div><span class="atog">▾</span></div>
+<div class="ab">
+<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
+<tr style="background:var(--s2)"><td style="padding:5px 8px;border:1px solid var(--bd);font-weight:600"><span class="en-s">Issue</span><span class="ko-s" style="display:none">항목</span></td><td style="padding:5px 8px;border:1px solid var(--bd);font-weight:600"><span class="en-s">Fee &amp; Stuart</span><span class="ko-s" style="display:none">Fee &amp; Stuart</span></td><td style="padding:5px 8px;border:1px solid var(--bd);font-weight:600"><span class="en-s">Osbourne</span><span class="ko-s" style="display:none">Osbourne</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Primary goal</span><span class="ko-s" style="display:none">주요 목표</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Safeguard against misreading</span><span class="ko-s" style="display:none">오독을 막는 안전장치</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Develop literary-critical method</span><span class="ko-s" style="display:none">문학비평적 방법 개발</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Approach</span><span class="ko-s" style="display:none">접근 방식</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Reader-protective / prohibitive</span><span class="ko-s" style="display:none">독자 보호형 / 금지 중심</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Text-constructive / methodological</span><span class="ko-s" style="display:none">본문 구축형 / 방법론 중심</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Literary devices</span><span class="ko-s" style="display:none">문학적 장치</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Implicit in the principles</span><span class="ko-s" style="display:none">원칙 안에 암묵적으로 포함</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Central: plot, POV, characterization, gap, irony explicitly analyzed</span><span class="ko-s" style="display:none">중심 요소: 플롯, 관점, 인물화, 빈틈, 아이러니를 명시적으로 분석</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Source/redaction criticism</span><span class="ko-s" style="display:none">자료/편집 비평</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Not emphasized</span><span class="ko-s" style="display:none">강조되지 않음</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Required as corrective to narrative criticism's ahistorical tendency</span><span class="ko-s" style="display:none">내러티브 비평의 비역사적 경향을 교정하는 필수 요소</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">David/Bathsheba</span><span class="ko-s" style="display:none">다윗/밧세바</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Illustrates Ten Commandments; shows consequences</span><span class="ko-s" style="display:none">십계명의 위반을 예시하며 그 결과를 보여 줌</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Sternberg: gaps force reader to fill in; suspense and tragic irony</span><span class="ko-s" style="display:none">Sternberg: 빈틈이 독자로 하여금 채워 넣게 만들며, 서스펜스와 비극적 아이러니를 형성함</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Sermon/application</span><span class="ko-s" style="display:none">설교/적용</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Caution: avoid personalizing and moralizing</span><span class="ko-s" style="display:none">경계: 개인화와 도덕화를 피하라</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Narrative form sermon — follow the plot movements</span><span class="ko-s" style="display:none">내러티브 형식 설교 — 플롯의 움직임을 따라가라</span></td></tr>
+<tr><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Audience</span><span class="ko-s" style="display:none">대상 독자</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">General readers, pastors, undergraduates</span><span class="ko-s" style="display:none">일반 독자, 목회자, 학부생</span></td><td style="padding:5px 8px;border:1px solid var(--bd)"><span class="en-s">Graduate scholars, serious exegetes</span><span class="ko-s" style="display:none">대학원 연구자, 진지한 주해자</span></td></tr>
+</table></div>
+</div></div>
+<div class="ac"><div class="ah" onclick="tog(this)"><div><div class="as"><span class="en-s">Integration Question</span><span class="ko-s" style="display:none">통합 질문</span></div></div><span class="atog">▾</span></div>
+<div class="ab"><div style="background:var(--ink);color:#f7f5f0;border-radius:var(--r);padding:11px 13px"><p style="font-size:13px;line-height:1.7;margin-bottom:7px"><span class="en-s">Fee &amp; Stuart protect from bad interpretation. Osbourne equips with literary tools. Are these complementary or in tension? For each of the six texts in the active learning session, which approach serves the interpreter better at each stage of the Five-Step Interpretive Flow — and why?</span><span class="ko-s" style="display:none">Fee &amp; Stuart는 잘못된 해석으로부터 보호해 주고, Osbourne은 문학적 분석 도구를 제공해 줍니다. 이 둘은 서로 보완적입니까, 아니면 긴장 관계에 있습니까? 액티브 러닝에서 다룰 여섯 본문 각각에 대해, 5단계 해석 흐름의 각 단계에서 어느 접근이 더 유익한지 그리고 그 이유를 설명해 보십시오.</span></p><p style="font-size:12px;color:rgba(247,245,240,.55)"><span class="en-s">Fee &amp; Stuart protect from bad interpretation. Osbourne equips with literary tools. Are these complementary or in tension?</span><span class="ko-s" style="display:none">피 &amp; 스튜어트는 오독을 막고, 오스본은 문학적 해석 도구를 제공합니다. 두 접근은 상호보완적인가, 아니면 긴장 관계인가?</span></p><textarea class="dk" placeholder="My assessment..."></textarea></div></div></div>
+</div>
+<!-- FORMATION MANUSCRIPT -->
+<div class="panel" id="panel-fm">
+<div class="txh" style="background:var(--c-fm)">
+<div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,245,240,.45);margin-bottom:2px"><span class="en-s">Formation Manuscript · MetaArchitect v6.5.0</span><span class="ko-s" style="display:none">형성 원고 · MetaArchitect v6.5.0</span></div>
+<div class="txr"><span class="en-s">Hermeneutics as Matrix Space</span><span class="ko-s" style="display:none">매트릭스 공간으로서의 해석학</span></div>
+<div class="txs"><span class="en-s">WHERE-WHO-WHAT · Formation Diagnostics · Future Self Protocol · Justice Categories</span><span class="ko-s" style="display:none">WHERE-WHO-WHAT · 형성 진단 · 미래 자기 프로토콜 · 정의 범주</span></div>
+</div>
+<div id="fm-content"></div>
+</div>
+<!-- CHECKLIST -->
+<div class="panel" id="panel-cl">
+<div style="background:var(--ink);color:#f7f5f0;border-radius:var(--r);padding:12px 15px;margin-bottom:12px"><div style="font-family:'Libre Baskerville',serif;font-size:17px;font-weight:700;"><span class="en-s">Pre-Class Checklist</span><span class="ko-s" style="display:none">수업 전 체크리스트</span></div><div style="font-size:11.5px;color:rgba(247,245,240,.5)"><span class="en-s">Complete all five outputs before class. These are your mastery demonstrations.</span><span class="ko-s" style="display:none">수업 전에 아래 다섯 가지 산출물을 모두 완성하십시오. 이것이 여러분의 숙달을 보여 주는 증거입니다.</span></div></div>
+<div style="background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:3px"><span class="en-s">Output 1</span><span class="ko-s" style="display:none">산출물 1</span></div><div style="font-size:13px;font-weight:500;margin-bottom:6px"><span class="en-s">In your own words: what is Fee &amp; Stuart's single most important principle for reading OT narrative? Why does it matter?</span><span class="ko-s" style="display:none">자신의 말로 설명해 보십시오: 구약 내러티브를 읽을 때 Fee &amp; Stuart가 제시하는 가장 중요한 원칙은 무엇이며, 왜 중요한가요?</span></div><textarea placeholder="Fee &amp; Stuart's most important principle is..."></textarea></div>
+<div style="background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:3px"><span class="en-s">Output 2</span><span class="ko-s" style="display:none">산출물 2</span></div><div style="font-size:13px;font-weight:500;margin-bottom:6px"><span class="en-s">Name one Fee &amp; Stuart common error you have personally committed. Name the text you misread, the error type, and what the text actually communicates.</span><span class="ko-s" style="display:none">자신이 실제로 범한 Fee &amp; Stuart의 일반적 오류 한 가지를 적어 보십시오. 어떤 본문을 잘못 읽었는지, 오류 유형은 무엇이었는지, 그리고 그 본문이 실제로 전달하는 바는 무엇인지 쓰십시오.</span></div><textarea placeholder="The error I have committed is [error name] when reading [text]. The text actually communicates..."></textarea></div>
+<div style="background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:3px"><span class="en-s">Output 3</span><span class="ko-s" style="display:none">산출물 3</span></div><div style="font-size:13px;font-weight:500;margin-bottom:6px"><span class="en-s">In your own words: what does Osbourne mean when he says narrative meaning is found "in a text as a whole rather than in isolated segments"? Give a concrete example.</span><span class="ko-s" style="display:none">자신의 말로 설명해 보십시오: Osbourne이 “내러티브의 의미는 고립된 부분이 아니라 본문 전체 안에서 발견된다”고 말할 때 무엇을 뜻하나요? 구체적 예를 하나 드십시오.</span></div><textarea placeholder="Osbourne means..."></textarea></div>
+<div style="background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:3px"><span class="en-s">Output 4</span><span class="ko-s" style="display:none">산출물 4</span></div><div style="font-size:13px;font-weight:500;margin-bottom:6px"><span class="en-s">State the primary difference between Fee &amp; Stuart and Osbourne in your own words. Which approach do you find more useful, and why?</span><span class="ko-s" style="display:none">Fee &amp; Stuart와 Osbourne의 가장 핵심적인 차이를 자신의 말로 서술하십시오. 그리고 어느 접근이 더 유익하다고 느끼는지, 그 이유는 무엇인지 설명하십시오.</span></div><textarea placeholder="The primary difference is..."></textarea></div>
+<div style="background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:3px"><span class="en-s">Output 5 — Formation</span><span class="ko-s" style="display:none">산출물 5 — 형성</span></div><div style="font-size:13px;font-weight:500;margin-bottom:6px"><span class="en-s">Where are you in the 2×3 Matrix Field as a biblical interpreter right now? HOME (comfortable with familiar reading), BRIDGE (in transition), or GUEST (encountering the text's world as genuinely foreign)?</span><span class="ko-s" style="display:none">지금 여러분은 성경 해석자로서 2×3 Matrix Field의 어디에 서 있습니까? HOME(익숙한 읽기에 머무는 자리), BRIDGE(전환 중인 자리), 아니면 GUEST(본문의 세계를 진짜 낯선 타자의 세계로 만나는 자리)입니까?</span></div><textarea placeholder="I stand at [position] because..."></textarea></div>
+<div class="aib"><div class="ait"><span class="en-s">Note</span><span class="ko-s" style="display:none">참고</span></div><div class="aix"><span class="en-s">The six biblical texts (Genesis 22, Judges 4, Ruth 1, 2 Samuel 11, 1 Kings 18, Genesis 50) are in the <strong>Active Learning in-class app</strong>. This app prepares you with the frameworks; the in-class app applies them.</span><span class="ko-s" style="display:none">여섯 개의 성경 본문(창 22장, 삿 4장, 룻 1장, 삼하 11장, 왕상 18장, 창 50장)은 <strong>수업 중 액티브 러닝 앱</strong>에서 다룹니다. 이 앱은 해석 틀을 준비시키고, 수업 중 앱은 그 틀을 본문에 적용하게 합니다.</span></div></div>
+</div>
+<!-- MCQ -->
+<div class="panel" id="panel-mcq">
+<div class="aib"><div class="ait"><span class="en-s">Complete Your Own Reading First</span><span class="ko-s" style="display:none">먼저 스스로 읽으십시오</span></div><div class="aix"><span class="en-s">The goal is not a perfect score but arriving with <strong>incomplete but thoughtful</strong> readings — aware of what shaped your interpretation.</span><span class="ko-s" style="display:none">목표는 만점을 받는 것이 아니라, 무엇이 여러분의 해석을 형성했는지를 자각한 채 <strong>완전하지 않더라도 사려 깊은</strong> 읽기를 가지고 오는 것입니다.</span></div></div>
+<div id="mcq-wrap"></div>
+<div style="display:flex;gap:6px;margin-top:5px"><button class="sbtn" onclick="subMCQ()"><span class="en-s">Check Answers</span><span class="ko-s" style="display:none">정답 확인</span></button><button class="rbtn" onclick="rstMCQ()"><span class="en-s">Reset</span><span class="ko-s" style="display:none">초기화</span></button></div>
+<div class="sc-d" id="sc-d"></div>
+</div>
+</div><!-- end main -->
+<script>
+var LANG='en',KO_CACHE={};
+
+// ─── FEE DATA ─────────────────────────────────────────────────────────────
+var FEE_MS=`<h3>Old Testament Narratives — Fee &amp; Stuart's Chapter</h3>
+<p>Fee &amp; Stuart's chapter on OT narrative is one of the most practically influential chapters in evangelical hermeneutics. It opens with a provocation: most Christians read biblical narratives the way children read fables — extracting a moral lesson that can be applied directly to the self. "The story of the Tortoise and the Hare teaches me to be persevering." "The story of David and Goliath teaches me to be courageous in the face of impossible odds." This mode of reading, Fee &amp; Stuart argue, is structurally identical to what they call the "monkey-see-monkey-do" reading of Scripture — and it systematically misses what OT narrative is actually doing.</p>
+<h4>The Foundational Claim: What Narratives Are</h4>
+<p>Narratives are "purposeful stories retelling the historical events of the past that are intended to give meaning and direction for a given people in the present." Three things distinguish this definition: (1) they are historical — these events actually happened; (2) they are purposeful — not random chronicle but intentional selection and arrangement; (3) they serve a community — they have a people in mind, a covenantal audience for whom the story matters.</p>
+<p>The crucial secondary claim: because the biblical narratives are inspired by the Holy Spirit, they tell "not so much our story as it is God's story — and it becomes ours as he 'writes' us into it." This is the hermeneutical key to the entire chapter: the narrative is not primarily about you. It is about God.</p>
+<h4>Three Levels of Narrative</h4>
+<p>Fee &amp; Stuart's three-level framework is their most original contribution to evangelical narrative hermeneutics. Every OT narrative operates at three interconnected levels simultaneously, and the interpreter must hold all three. <strong>Level 3 (Top — Metanarrative):</strong> The universal plan of God worked out through creation — creation, fall, the power and ubiquity of sin, the need for redemption, Christ's incarnation and sacrifice. This is the story Jesus spoke of when he said the Scriptures "testify about me" (John 5:39). <strong>Level 2 (Middle — Story of Israel):</strong> The story of God's redemption of a specific people under the first covenant — from Abraham's call through exile and restoration. <strong>Level 1 (Bottom — Individual Narratives):</strong> The hundreds of individual narratives (Abraham, Isaac, Jacob, Joseph, Ruth, David, Elijah) that constitute the other two levels. The interpretive mandate: always ask how a Level 1 narrative fits within Levels 2 and 3.</p>
+<h4>God as Protagonist</h4>
+<p>"In the biblical story God is the protagonist." This is not a theological assertion bolted onto the hermeneutical method — it is the hermeneutical method. Failing to read God as protagonist is the root cause of every major interpretive error Fee &amp; Stuart subsequently identify. The Joseph narrative (Gen 37–50) is their paradigm case: God's presence operates explicitly ("The LORD was with Joseph," 39:2; "God intended it for good," 50:20) and implicitly (the timing of events, the source of the dreams). "To miss God's presence in the narrative is to miss the perspective of the narrative altogether."</p>
+<h4>Reading Between the Lines: Implicit Teaching</h4>
+<p>A central contribution of the chapter is the concept of implicit teaching. Narratives do not always state their theological points; they imply them through structure, character, and plot. Fee &amp; Stuart use the book of Ruth as their paradigm case: the narrator never says "Ruth was converted" — but the covenant oath in YHWH's name (1:17) makes it unmistakable to the original reader. Ruth's ancestry in David's genealogy (4:17–21) — and by extension in the Messianic line — is communicated through genealogy, not declaration. The hermeneutical task: "read things out of the narrative rather than into it."</p>
+<h4>10 Principles and 9 Common Errors</h4>
+<p>The chapter's practical contribution is the explicit articulation of ten summarizing principles and nine common errors. These are not abstract methodological prescriptions — they are responses to specific and recurring misreadings that Fee &amp; Stuart had observed across decades of biblical teaching. The principles protect the interpreter from the errors; the errors name the specific ways the principles have been violated. Together, they constitute a complete practical framework for reader accountability in OT narrative interpretation.</p>`;
+
+var FEE_MS_KO=`<h3>구약 내러티브 — Fee &amp; Stuart의 장</h3>
+<p>Fee &amp; Stuart의 구약 내러티브 장은 복음주의 해석학에서 가장 실제적 영향력이 큰 장 가운데 하나입니다. 이 장은 도발적인 관찰로 시작합니다. 많은 그리스도인들이 성경 내러티브를 마치 어린이가 우화를 읽듯이 읽는다는 것입니다. 곧 이야기에서 곧바로 자신에게 적용할 수 있는 교훈을 뽑아내려 합니다. “거북이와 토끼의 이야기는 나에게 인내를 가르친다.” “다윗과 골리앗은 불가능한 상황 앞에서도 용기를 내라고 가르친다.” Fee &amp; Stuart는 이런 읽기 방식이 그들이 말하는 “보고 따라 하기(monkey-see-monkey-do)”식 성경 읽기와 구조적으로 동일하며, 그래서 구약 내러티브가 실제로 무엇을 하고 있는지를 체계적으로 놓치게 만든다고 주장합니다.</p>
+<h4>기초 주장: 내러티브란 무엇인가</h4>
+<p>내러티브는 “과거의 역사적 사건들을 다시 말해 주면서, 현재의 어떤 공동체에게 의미와 방향을 주도록 의도된 목적 있는 이야기”입니다. 이 정의를 특징짓는 요소는 세 가지입니다. (1) 내러티브는 역사적입니다. 곧 이 사건들은 실제로 일어났습니다. (2) 내러티브는 목적적입니다. 우연한 연대기 기록이 아니라 의도적인 선택과 배열입니다. (3) 내러티브는 공동체를 섬깁니다. 이 이야기가 중요해지는 언약 공동체, 곧 특정 독자 공동체를 염두에 둡니다.</p>
+<p>이어지는 핵심 주장은 이렇습니다. 성경의 내러티브는 성령의 감동으로 기록되었기 때문에 “무엇보다도 우리의 이야기가 아니라 하나님의 이야기이며, 하나님께서 우리를 그 이야기 안에 써 넣으실 때 비로소 우리의 이야기가 된다.” 이것이 이 장 전체를 지배하는 해석학적 열쇠입니다. 내러티브는 우선적으로 당신에 관한 이야기가 아닙니다. 하나님에 관한 이야기입니다.</p>
+<h4>내러티브의 세 수준</h4>
+<p>Fee &amp; Stuart의 세 수준 틀은 복음주의 내러티브 해석학에 대한 가장 독창적인 공헌 가운데 하나입니다. 모든 구약 내러티브는 동시에 상호 연결된 세 수준에서 작동하며, 해석자는 이 셋을 함께 붙들어야 합니다. <strong>제3수준(상위 메타내러티브):</strong> 창조, 타락, 죄의 보편성과 권세, 구속의 필요, 그리스도의 성육신과 희생까지 포함하는 하나님의 보편적 구원 계획입니다. 예수께서 “성경이 곧 내게 대하여 증언한다”고 말씀하실 때(요 5:39) 가리킨 바로 그 이야기입니다. <strong>제2수준(중간 수준):</strong> 첫 언약 아래 있는 특정 백성, 곧 이스라엘을 구속하시는 하나님의 이야기입니다. 아브라함의 부르심에서 포로와 회복에 이르는 이야기입니다. <strong>제1수준(하위 개별 내러티브):</strong> 아브라함, 이삭, 야곱, 요셉, 룻, 다윗, 엘리야와 같은 수많은 개별 이야기들입니다. 해석의 의무는 언제나 같습니다. 한 개별 내러티브가 이스라엘 이야기와 메타내러티브 안에 어떻게 들어가는지를 묻는 것입니다.</p>
+<h4>하나님이 주인공이다</h4>
+<p>“성경 이야기에서 하나님은 주인공이다.” 이것은 해석 방법에 덧붙여진 신학적 진술이 아니라 곧 해석 방법 자체입니다. 하나님을 주인공으로 읽지 못하는 것이 이후 Fee &amp; Stuart가 지적하는 대부분의 해석 오류의 뿌리입니다. 요셉 이야기(창 37–50)는 그들의 대표 사례입니다. 하나님의 임재는 명시적으로도 드러나고(“여호와께서 요셉과 함께하셨다,” 39:2; “하나님은 그것을 선으로 바꾸셨다,” 50:20), 암묵적으로도 드러납니다(사건의 타이밍, 꿈의 출처, 전개의 방향). “내러티브 속에서 하나님의 임재를 놓치면 내러티브의 관점 자체를 놓치는 것이다.”</p>
+<h4>행간 읽기: 암묵적 가르침</h4>
+<p>이 장의 중요한 공헌 가운데 하나는 암묵적 가르침이라는 개념입니다. 내러티브는 언제나 신학적 요점을 직접 진술하지 않습니다. 오히려 구조, 인물, 플롯을 통해 암시합니다. Fee &amp; Stuart는 룻기를 대표 사례로 사용합니다. 화자는 한 번도 “룻이 개종했다”고 말하지 않습니다. 그러나 YHWH의 이름으로 맺는 언약적 맹세(룻 1:17)는 원 독자에게 그 사실을 분명하게 드러냅니다. 또한 룻이 다윗의 족보(4:17–21)에 포함되고 결국 메시아 계보에 들어간다는 사실도 선언이 아니라 족보를 통해 전달됩니다. 따라서 해석자의 과제는 “이야기 안으로 무언가를 읽어 넣는 것이 아니라, 이야기로부터 그것을 읽어 내는 것”입니다.</p>
+<h4>10가지 원칙과 9가지 일반적 오류</h4>
+<p>이 장의 실제적 공헌은 열 가지 요약 원칙과 아홉 가지 일반적 오류를 분명하게 제시한 데 있습니다. 이것들은 추상적 방법론이 아니라, Fee &amp; Stuart가 수십 년간 성경을 가르치며 반복적으로 목격한 오독에 대한 응답입니다. 원칙은 해석자를 오류로부터 지켜 주고, 오류 목록은 원칙이 어떻게 위반되는지를 구체적으로 보여 줍니다. 이 둘을 함께 보면 구약 내러티브 해석에서 독자의 책임을 묻는 완전한 실천 틀이 형성됩니다.</p>`;
+
+var FEE_OUTLINE=[
+{v:'Section I',en:'What Narratives Are — Definition, historical and purposeful character, God as ultimate author, the basic narrative elements (characters, plot, resolution).',ko:'내러티브란 무엇인가 — 정의, 역사적이고 목적적인 성격, 하나님이 궁극적 저자, 기본 내러티브 요소.'},
+{v:'Section II',en:'Three Levels of Narrative — Top (metanarrative), Middle (story of Israel under covenant), Bottom (individual narratives). The mandate: always ask how Level 1 fits Levels 2 and 3.',ko:'내러티브의 세 수준 — 최상위(메타내러티브), 중간(이스라엘의 이야기), 하위(개별 내러티브). 항상 제1수준이 제2-3수준에 어떻게 맞는지 물어보라.'},
+{v:'Section III',en:'God as Protagonist — "In the biblical story God is the protagonist." The Joseph narrative as paradigm case: God\'s presence operates explicitly and implicitly.',ko:'하나님이 주인공 — "성경 이야기에서 하나님은 주인공입니다." 요셉 내러티브를 패러다임 케이스로: 하나님의 임재는 명시적으로 그리고 암묵적으로 작동합니다.'},
+{v:'Section IV',en:'The Scenic Nature of Hebrew Narrative — The scene as the basic unit. Characters characterized through contrast, parallel, and dialogue rather than description. Character development through action.',ko:'히브리 내러티브의 장면적 성격 — 장면이 기본 단위. 인물이 묘사보다 대조, 병행, 대화를 통해 인물화됨. 행동을 통한 인물 발전.'},
+{v:'Section V',en:'Reading Between the Lines — Implicit teaching as significant as explicit. Ruth as paradigm case: narrator never states "Ruth was converted" but implies it through dialogue and genealogy.',ko:'행간 읽기 — 암묵적 교훈이 명시적 교훈만큼 중요합니다. 룻기를 패러다임 케이스로: 화자는 결코 "룻이 개종했다"고 진술하지 않지만 대화와 족보를 통해 암시합니다.'},
+{v:'Section VI',en:'What Narratives Are NOT — Not allegories. Not moral lessons. Not written to answer all theological questions. Not prescriptive behavioral templates.',ko:'내러티브가 아닌 것 — 알레고리 아님. 도덕적 교훈 아님. 모든 신학적 질문에 답하기 위해 쓰인 것 아님. 규범적 행동 템플릿 아님.'},
+{v:'Section VII',en:'Common Errors — Nine specific misreading patterns: Allegorizing, Decontextualizing, Selectivity, Moralizing, Personalizing, Misappropriation, False Appropriation, False Combination, Redefinition.',ko:'일반적 오류 — 아홉 가지 구체적인 잘못된 읽기 패턴.'},
+{v:'Section VIII',en:'10 Principles for Interpreting OT Narratives — The comprehensive summarizing framework. Both protective (telling what NOT to do) and constructive (telling what the text IS doing).',ko:'구약 내러티브 해석을 위한 10가지 원칙 — 포괄적 요약 틀. 보호적(하지 말아야 할 것)이면서 건설적(본문이 하는 것)입니다.'}
+];
+
+var FEE_PRINCIPLES=[
+{n:'1',en:'OT narrative usually does NOT directly teach a doctrine. The narrative genre is not the place for direct doctrinal instruction — that belongs to other biblical genres.',ko:'구약 내러티브는 대개 교리를 직접 가르치지 않습니다.'},
+{n:'2',en:'OT narrative usually ILLUSTRATES a doctrine or doctrines taught propositionally elsewhere in Scripture. The narrative shows in action what the law, epistles, or wisdom literature state directly.',ko:'구약 내러티브는 대개 성경의 다른 곳에서 명제적으로 가르친 교리를 예시합니다.'},
+{n:'3',en:'Narratives record what happened — not necessarily what should have happened or what ought to happen every time. Therefore, not every narrative has an individual identifiable moral application.',ko:'내러티브는 일어난 일을 기록합니다 — 반드시 일어나야 했던 일이나 매번 일어나야 할 일을 기록하지 않습니다.'},
+{n:'4',en:'What people do in narratives is not necessarily a good example for us. Frequently, it is just the opposite. Narrative characters are not automatically positive role models.',ko:'내러티브에서 사람들이 하는 것이 반드시 우리의 좋은 예시가 되지는 않습니다. 종종 정반대입니다.'},
+{n:'5',en:'Many (if not most) of the characters in OT narratives are far from perfect — as are their actions as well. Complexity and moral failure are the rule, not the exception.',ko:'구약 내러티브의 많은(대부분이 아니더라도) 인물들이 완벽하지 않습니다 — 그들의 행동도 마찬가지입니다.'},
+{n:'6',en:'We are not always told at the end of a narrative whether what happened was good or bad. We are expected to be able to judge this on the basis of what God has taught us directly and categorically elsewhere in Scripture.',ko:'내러티브의 끝에서 일어난 일이 좋은지 나쁜지 항상 알려주지 않습니다. 성경의 다른 곳에서 판단해야 합니다.'},
+{n:'7',en:'All narratives are selective and incomplete. Not all the relevant details are always given. What does appear in the narrative is everything that the inspired author thought important for us to know.',ko:'모든 내러티브는 선택적이고 불완전합니다. 등장하는 것은 영감받은 저자가 중요하다고 생각한 모든 것입니다.'},
+{n:'8',en:'Narratives are not written to answer all our theological questions. They have particular, specific, limited purposes and deal with certain issues, leaving others to be dealt with elsewhere in other ways.',ko:'내러티브는 우리의 모든 신학적 질문에 답하기 위해 쓰이지 않았습니다. 특정하고 제한된 목적이 있습니다.'},
+{n:'9',en:'Narratives may teach either explicitly (by clearly stating something) or implicitly (by clearly implying something without actually stating it). Both modes of teaching carry equal authority.',ko:'내러티브는 명시적으로 또는 암묵적으로 가르칠 수 있습니다. 두 교훈 방식 모두 동등한 권위를 지닙니다.'},
+{n:'10',en:'In the final analysis, God is the hero of all biblical narratives. All other characters are secondary. The interpreter who forgets this will systematically misread every text.',ko:'최종 분석에서 하나님은 모든 성경 내러티브의 주인공입니다. 이를 잊는 해석자는 체계적으로 모든 본문을 잘못 읽을 것입니다.'}
+];
+
+var FEE_ERRORS=[
+{name:'Allegorizing',en:'Treating the narrative as an allegory filled with hidden meanings. "Moses going up and down Mount Sinai is an allegory of the soul\'s ascent to God." Whatever else biblical narratives are, they are not allegories.',ko:'알레고리화: 내러티브를 숨겨진 의미로 가득 찬 알레고리로 취급하는 것.'},
+{name:'Decontextualizing',en:'Ignoring the full historical and literary contexts, concentrating on small units and missing interpretive clues. Taking things out of context enough can make any part of Scripture say anything.',ko:'탈맥락화: 역사적 및 문학적 맥락을 무시하고 작은 단위에 집중하여 해석적 단서를 놓치는 것.'},
+{name:'Selectivity',en:'Picking and choosing specific words and phrases to concentrate on while ignoring others and the overall sweep of the narrative. Instead of listening to the whole, ignoring the parts and the whole entirely.',ko:'선택성: 다른 것들과 전반적인 내러티브의 흐름을 무시하면서 특정 단어와 구에 집중하는 것.'},
+{name:'Moralizing',en:'Assuming principles for living can be derived from all passages. Asking "what is the moral of this story?" at the end of every narrative. Narratives were written to show the progress of God\'s redemptive history, not to illustrate principles.',ko:'도덕화: 모든 구절에서 삶의 원리를 도출할 수 있다고 가정하는 것. 내러티브는 하나님의 구원 역사를 보여주기 위해 쓰였습니다.'},
+{name:'Personalizing',en:'Assuming any or all parts of the narrative apply to you or your group in a way that they do not apply to everyone else. "The story of Balaam\'s talking donkey reminds me that I talk too much."',ko:'개인화: 내러티브의 일부가 다른 사람들에게 적용되지 않는 방식으로 당신이나 그룹에 적용된다고 가정하는 것.'},
+{name:'Misappropriation',en:'Appropriating a narrative for purposes quite foreign to its reason for being there. Using Gideon\'s fleece as a method for finding God\'s will, when the narrator is showing God saved Israel despite Gideon\'s lack of faith.',ko:'오용: 내러티브가 존재하는 이유와 완전히 무관한 목적으로 사용하는 것. 기드온의 양털을 하나님의 뜻을 찾는 방법으로 사용하는 것.'},
+{name:'False Appropriation',en:'Reading into a biblical narrative suggestions or ideas from contemporary culture that are foreign to the narrator\'s purpose and contradictory to his point of view. Reading David and Jonathan\'s love as homosexual.',ko:'거짓 전용: 화자의 목적과 무관하고 그의 관점에 모순되는 현대 문화의 암시나 아이디어를 내러티브에 읽어 넣는 것.'},
+{name:'False Combination',en:'Combining elements from here and there in a passage to make a point, even though the elements are not directly connected. Missing that David\'s capture of Jerusalem (2 Sam 5) refers to the inner city (Zion), not the greater Jerusalem already captured in Judg 1:8.',ko:'거짓 조합: 직접 연결되지 않은 요소들을 여기저기서 결합하여 주장을 만드는 것.'},
+{name:'Redefinition',en:'When the plain meaning leaves people cold or says something other than what they wish it said, redefining it to mean something else. Using "heal their land" (2 Chr 7:14) as a promise to modern nations when it was about the land of Israel.',ko:'재정의: 평범한 의미가 차갑게 느껴지거나 원하는 것과 다른 것을 말할 때 다른 것을 의미하도록 재정의하는 것.'}
+];
+
+var FEE_THEMES=[
+{en:'Theocentric Reading as Method',ko:'방법으로서의 신중심적 읽기',d_en:'Fee\'s most distinctive contribution: the protagonist principle is not a theological assertion added to the method but IS the method. Every interpretive decision flows from locating God as the primary actor.',d_ko:'피의 가장 독특한 공헌: 주인공 원칙은 방법에 추가된 신학적 주장이 아니라 방법 자체입니다.'},
+{en:'Descriptive vs Prescriptive as the Master Distinction',ko:'마스터 구별로서의 묘사 대 규범',d_en:'The single most useful tool in Fee\'s chapter: "Narratives record what happened — not necessarily what should have happened." Every error in the Common Errors list is a violation of this distinction.',d_ko:'피의 챕터에서 가장 유용한 도구: "내러티브는 일어난 일을 기록합니다 — 반드시 일어나야 했던 일이 아닙니다."'},
+{en:'Three Levels as Canonical Accountability',ko:'정경적 책임으로서의 세 수준',d_en:'Fee\'s three-level framework prevents atomistic reading: every individual narrative must be read in conversation with the story of Israel and the metanarrative of redemption. This prevents the text from being pressed into service for purposes foreign to its canonical function.',d_ko:'피의 세 수준 틀은 원자적 읽기를 방지합니다. 모든 개별 내러티브는 이스라엘의 이야기와 구원의 메타내러티브와의 대화 속에서 읽혀야 합니다.'},
+{en:'Implicit Teaching as Equally Authoritative',ko:'동등한 권위를 지닌 암묵적 교훈',d_en:'Fee\'s Principle 9 challenges the Protestant tendency to privilege explicit propositional statements. Implicit teaching — what the narrative implies without stating — carries equal theological authority. Ruth\'s conversion is no less real for not being stated.',d_ko:'피의 원칙 9는 명시적 명제 진술을 특권화하는 경향에 도전합니다. 암묵적 교훈은 동등한 신학적 권위를 지닙니다.'},
+{en:'Reader Accountability Before the Text',ko:'본문 앞에서의 독자 책임',d_en:'The nine common errors name specific failures of reader discipline. Fee\'s underlying commitment: the reader is accountable to what the text actually says, not to what the reader wishes it said. The errors are patterns of reader self-assertion against the text.',d_ko:'아홉 가지 일반적 오류는 독자 훈련의 구체적 실패를 명명합니다. 독자는 본문이 실제로 말하는 것에 책임이 있습니다.'}
+];
+
+// ─── OSBOURNE DATA ────────────────────────────────────────────────────────
+var OSB_MS=`<h3>Osbourne's Chapter on Narrative — The Hermeneutical Spiral</h3>
+<p>Osbourne's chapter on narrative represents one of the most technically sophisticated treatments of OT narrative hermeneutics available for graduate students. Where Fee &amp; Stuart approach the chapter from the reader's perspective (what errors do readers commit?), Osbourne approaches it from the text's perspective (how is this text constructed, and what does its construction communicate?). These two orientations are complementary rather than competing, but their difference in emphasis is significant for the interpreter who wants to use both well.</p>
+<h4>The Foundational Claim: Narrative as Art</h4>
+<p>Osbourne defines biblical narrative as "art" or "poetry" — centering on the literary artistry of the author. While many narrative critics would separate this from historical reference, Osbourne insists on combining both: "the biblical narratives contain both history and theology, and I would add that these are brought together via a 'story' format." The historical basis for the stories is crucial; but the representation of that story in the text is the actual object of interpretation.</p>
+<p>The key hermeneutical claim: "meaning is found in a text as a whole rather than in isolated segments." Narrative criticism recognizes that meaning emerges from the interplay of all the text's elements — plot, character, point of view, literary devices — not from isolated verses or phrases. This makes the narrative form itself a carrier of theological meaning, not merely a vehicle for theological content.</p>
+<h4>The Dangers Osbourne Names</h4>
+<p>Unlike Fee &amp; Stuart, Osbourne is equally concerned with dangers within narrative criticism itself. He names two: (1) <strong>A dehistoricizing tendency</strong> — narrative critics who radically deny any historical element in the text, treating it as pure fiction and removing it from the framework within which it was written. (2) <strong>Reader-as-meaning-producer</strong> — the philosophical stress that the reader, not the author, produces the meaning. Osbourne's method: narrative criticism must be combined with source and redaction criticism as correctives against these ahistorical and subjective tendencies.</p>
+<h4>Point of View: The Five Dimensions</h4>
+<p>Osbourne's most original contribution is his analysis of narrative point of view across five dimensions. The narrator's point of view guides the reader to the significance and shape of the story — it is the mechanism through which the narrative's theological meaning is communicated without being stated. (1) <strong>Psychological:</strong> Inside information on characters' thoughts and feelings — the narrator is omniscient; (2) <strong>Evaluative/Ideological:</strong> The concepts of right and wrong that prevail in the narrative world; (3) <strong>Spatial:</strong> The omnipresent narrator who can move from place to place; (4) <strong>Temporal:</strong> The ability to view action from within the story or from the future; (5) <strong>Phraseological:</strong> Dialogue and speeches that give the reader inside access they would never have in the normal world.</p>
+<h4>Characterization, Gaps, and Leitwort</h4>
+<p>Three specific analytical tools deserve particular attention. <strong>Characterization:</strong> Osbourne follows Sternberg in identifying five types (physical, social, singular/concretizing, moral/ideological, psychological) and emphasizes that OT major characters are <em>dynamic</em> — they change drastically throughout the narrative, unlike the simpler characters of the Gospels. <strong>Gaps:</strong> Deliberately withheld information that forces the reader to fill in, heightening suspense and intensifying moral engagement. The David-Bathsheba narrative (2 Sam 11) is the paradigm case: "the reader is forced to speculate and fill in the missing information." <strong>Leitwort:</strong> Word-root repetition for literary effect — Ruth's שׁוּב ("return/go back") appearing seven times in chapter 1 is Osbourne's primary example.</p>
+<h4>The 7-Step Method</h4>
+<p>Osbourne synthesizes his approach in a seven-step method that moves from structural analysis through stylistic and exegetical analysis to contextualization and narrative sermon. This method integrates narrative criticism (literary approach) with historical-grammatical exegesis — preventing the literary from swallowing the historical, and preventing the historical from missing the literary. The method's final step (narrative form sermon) connects the hermeneutical method to the homiletical task.</p>`;
+
+var OSB_MS_KO=`<h3>Osbourne의 내러티브 장 — The Hermeneutical Spiral</h3>
+<p>Osbourne의 내러티브 장은 대학원 수준의 학생을 위해 제공되는 구약 내러티브 해석학 논의 가운데 가장 정교한 기술적 논의 중 하나입니다. Fee &amp; Stuart가 “독자가 어떤 오류를 범하는가?”라는 관점에서 접근한다면, Osbourne은 “이 본문은 어떻게 구성되었으며, 그 구성은 무엇을 전달하는가?”라는 본문 중심의 관점에서 접근합니다. 두 방향은 경쟁하기보다는 상호보완적이지만, 둘을 함께 사용하려는 해석자에게는 강조점의 차이가 매우 중요합니다.</p>
+<h4>기초 주장: 내러티브는 예술이다</h4>
+<p>Osbourne은 성경 내러티브를 “예술(art)” 또는 “시(poetry)”로 정의하며, 저자의 문학적 예술성에 초점을 맞춥니다. 많은 내러티브 비평가들이 이것을 역사적 지시와 분리하려 하지만, Osbourne은 둘을 결합해야 한다고 주장합니다. “성경 내러티브는 역사와 신학을 모두 담고 있으며, 이 둘은 ‘이야기’라는 형식을 통해 결합된다.” 이야기의 역사적 기반은 중요합니다. 그러나 해석의 직접 대상은 그 역사가 본문 안에서 어떻게 서술되고 구성되었는가 하는 점입니다.</p>
+<p>그의 핵심 해석학적 주장은 이렇습니다. “의미는 고립된 단편이 아니라 본문 전체 안에서 발견된다.” 내러티브 비평은 의미가 플롯, 인물, 관점, 문학적 장치 등 모든 요소의 상호작용 안에서 생겨난다고 봅니다. 이 때문에 내러티브 형식 자체가 단순한 전달 수단이 아니라 신학적 의미를 실어 나르는 그릇이 됩니다.</p>
+<h4>Osbourne이 지적하는 위험들</h4>
+<p>Fee &amp; Stuart와 달리, Osbourne은 내러티브 비평 내부의 위험에도 크게 주목합니다. 그는 두 가지를 말합니다. (1) <strong>비역사화 경향</strong>: 어떤 내러티브 비평은 본문의 역사적 요소를 급진적으로 부정하고 그것을 순수한 허구처럼 취급하여, 본문이 기록된 원래의 틀에서 떼어 놓습니다. (2) <strong>독자가 의미 생산자가 되는 위험</strong>: 독자가 아니라 저자가 아니라, 독자가 의미를 생산한다고 보는 철학적 압박입니다. 그래서 Osbourne은 내러티브 비평이 자료비평과 편집비평과 결합되어야만 이러한 비역사적·주관주의적 경향을 교정할 수 있다고 주장합니다.</p>
+<h4>관점(Point of View): 다섯 차원</h4>
+<p>Osbourne의 가장 독창적인 공헌은 관점을 다섯 차원으로 분석한 점입니다. 화자의 관점은 독자를 이야기의 중요성과 형상으로 이끌어 가며, 내러티브의 신학적 의미가 직접 선언되지 않고도 전달되도록 만드는 장치입니다. (1) <strong>심리적 차원</strong>: 인물의 생각과 감정에 대한 내부 정보를 제공합니다. 화자는 전지적입니다. (2) <strong>평가적/이데올로기적 차원</strong>: 이야기 세계 안에서 무엇이 옳고 그른지 규정하는 가치 체계입니다. (3) <strong>공간적 차원</strong>: 화자가 장면에서 장면으로 자유롭게 이동하며 공간 전체를 포괄하는 능력입니다. (4) <strong>시간적 차원</strong>: 사건을 이야기 내부 시점에서 보기도 하고, 미래의 시점에서 평가하기도 하는 능력입니다. (5) <strong>언어적 차원</strong>: 대화와 연설을 통해 현실 세계에서는 알 수 없는 내부 접근을 독자에게 제공합니다.</p>
+<h4>인물화, 빈틈, Leitwort</h4>
+<p>세 가지 분석 도구는 특별한 주목을 받을 만합니다. <strong>인물화(Characterization)</strong>: Osbourne은 Sternberg를 따라 다섯 가지 유형(신체적, 사회적, 개별화/구체화, 도덕적/이데올로기적, 심리적)을 제시하며, 구약의 주요 인물들이 복음서의 더 단순한 인물들과 달리 <em>역동적</em>이라는 점을 강조합니다. 곧 이야기 진행 속에서 크게 변합니다. <strong>빈틈(Gap)</strong>: 일부 정보를 의도적으로 감추어 독자가 그 공백을 메우도록 만드는 장치로, 긴장과 도덕적 참여를 높입니다. 다윗과 밧세바 이야기(삼하 11장)는 대표적 사례입니다. “독자는 누락된 정보를 추론하고 채워 넣도록 강요받는다.” <strong>Leitwort</strong>: 문학적 효과를 내기 위한 어근 반복입니다. Osbourne은 룻기 1장에서 שׁוּב(“돌아가다”)이 일곱 번 반복되는 예를 주요 사례로 듭니다.</p>
+<h4>7단계 방법</h4>
+<p>Osbourne은 자신의 접근을 일곱 단계 방법으로 종합합니다. 이 방법은 구조 분석에서 시작해 문체 분석과 주해를 거쳐, 신학적 분석과 맥락화, 그리고 내러티브 형식 설교에 이릅니다. 이 과정은 내러티브 비평(문학적 접근)과 역사-문법적 주해를 결합하여, 문학성이 역사를 삼켜 버리는 것도 막고, 역사성만 강조하다가 문학적 형식을 놓치는 것도 막습니다. 마지막 단계인 내러티브 형식 설교는 해석학적 방법이 궁극적으로 선포의 자리로 이어져야 함을 보여 줍니다.</p>`;
+
+var OSB_OUTLINE=[
+{v:'Section I',en:'Introduction to Narrative Criticism — The current interest in literary criticism; narrative studies recognize meaning in a text as whole; the method\'s dangers and correctives.',ko:'내러티브 비평 소개 — 현재 문학 비평에 대한 관심; 내러티브 연구는 전체로서의 본문에서 의미를 인식; 방법의 위험과 교정책.'},
+{v:'Section II',en:'Definition of Narrative — Narrative as "art" or "poetry"; both history and theology brought together via story format; narrative criticism focused on poetics and meaning.',ko:'내러티브의 정의 — 내러티브를 "예술" 또는 "시"로; 이야기 형식을 통해 역사와 신학이 함께; 시학과 의미에 집중하는 내러티브 비평.'},
+{v:'Section III',en:'Point of View (5 Dimensions) — Psychological, evaluative/ideological, spatial, temporal, phraseological. The narrator\'s omniscient perspective guides the reader to the text\'s significance.',ko:'관점(5가지 차원) — 심리적, 평가적/이데올로기적, 공간적, 시간적, 언어적. 화자의 전지적 관점이 독자를 본문의 중요성으로 안내.'},
+{v:'Section IV',en:'Plot — United sequence of events in cause-effect order building to a climax. The basic element is conflict (God vs Satan, discipleship vs rebellion). Macro and micro levels.',ko:'플롯 — 절정으로 이어지는 인과 관계 순서의 통합된 사건 시퀀스. 기본 요소는 갈등(하나님 vs 사탄, 제자도 vs 반역). 거시와 미시 수준.'},
+{v:'Section V',en:'Characterization — OT characters are dynamic (change drastically, unlike Gospel characters). Five types (Sternberg): physical, social, singular, moral, psychological. Dialogue reveals character.',ko:'인물화 — 구약 인물들은 역동적입니다(복음서 인물들과 달리 크게 변합니다). 다섯 가지 유형(스턴버그): 신체적, 사회적, 단수적, 도덕적, 심리적.'},
+{v:'Section VI',en:'Literary Devices — Gap (deliberately withheld information), Irony, Leitwort (word-root repetition: שׁוּב in Ruth 1), Repetition (5 types: Leitwort, motif, theme, sequence, type-scene), Chiasm.',ko:'문학적 장치 — 빈틈(의도적으로 보류된 정보), 아이러니, 레이트보르트(어근 반복: 룻기 1장의 שׁוּב), 반복(5가지 유형), 교차 배열.'},
+{v:'Section VII',en:'7-Step Method — Structural, stylistic, redactional, exegetical, theological, contextual analysis → narrative form sermon. Integrates narrative criticism with historical-grammatical exegesis.',ko:'7단계 방법 — 구조적, 문체적, 편집적, 석의적, 신학적, 맥락적 분석 → 내러티브 형식 설교. 내러티브 비평과 역사-문법적 석의를 통합.'},
+{v:'Section VIII',en:'Contextualization and the Narrative Sermon — The reader identifies with the implied reader to relive the conflicts. The sermon follows the plot movements rather than imposing a three-point didactic outline.',ko:'맥락화와 내러티브 설교 — 독자가 암묵적 독자와 동일시하여 갈등을 재경험. 설교는 세 가지 교훈적 개요를 부과하기보다 플롯 움직임을 따라간다.'}
+];
+
+var OSB_METHOD=[
+{n:'1',en:'Structural Analysis — Close reading of the text to determine the narrative flow and plot at macro and micro levels. Chart the actantial units (actions/elements) and the setting.',ko:'구조적 분석 — 거시 및 미시 수준에서 내러티브 흐름과 플롯을 결정하기 위한 본문의 정밀 읽기. 행위 단위(행동/요소)와 배경을 도표로 작성.'},
+{n:'2',en:'Stylistic Analysis — Identify rhetorical techniques and literary devices (chiasm, inclusio, repetition, gaps, antitheses, symbol, irony) and see how these deepen the plot structure.',ko:'문체적 분석 — 수사적 기법과 문학적 장치(교차 배열, 포함, 반복, 빈틈, 대조, 상징, 아이러니)를 확인하고 이것들이 플롯 구조를 어떻게 심화시키는지 확인.'},
+{n:'3',en:'Redactional Analysis — Source-critical and redactional study to determine distinctive emphases. Compare texts to detect additions, omissions, and expansions that identify major themes.',ko:'편집적 분석 — 독특한 강조점을 결정하기 위한 자료 비평적 및 편집적 연구. 주요 주제를 확인하는 추가, 생략, 확장을 감지하기 위해 본문 비교.'},
+{n:'4',en:'Exegetical Analysis — Grammatical-historical approach, grammar and semantic research. Background data is exceedingly critical for narrative research.',ko:'석의적 분석 — 문법-역사적 접근, 문법 및 의미론적 연구. 배경 데이터는 내러티브 연구에 극히 중요합니다.'},
+{n:'5',en:'Theological Analysis — Separate detailed emphases from major theological threads. Both dramatic (praxis) and theological (propositional) aspects must be related. The theology must be both analytical and integrative.',ko:'신학적 분석 — 세부적 강조점을 주요 신학적 실로부터 분리. 드라마적(실천) 및 신학적(명제적) 측면 모두 관련되어야 합니다.'},
+{n:'6',en:'Contextualization — Identify with the "implied reader" to relive the conflicts and apply the narrative\'s lessons to modern situations. The reader does not merely observe but participates.',ko:'맥락화 — 갈등을 재경험하고 내러티브의 교훈을 현대 상황에 적용하기 위해 "암묵적 독자"와 동일시. 독자는 단지 관찰하는 것이 아니라 참여합니다.'},
+{n:'7',en:'Narrative Form Sermon — Instead of a three-point didactic outline, the sermon follows the contours of the biblical story itself, retelling the drama and helping the congregation relive the narrative\'s tension.',ko:'내러티브 형식 설교 — 세 가지 교훈적 개요 대신, 설교가 성경 이야기 자체의 윤곽을 따라 드라마를 다시 말하고 회중이 내러티브의 긴장을 재경험하도록 돕습니다.'}
+];
+
+var OSB_DEVICES=[
+{name:'Gap',en:'Deliberately withheld information that forces the reader to fill in the missing content, heightening suspense and intensifying moral engagement. Sternberg\'s paradigm case: David and Bathsheba (2 Sam 11) — "The writer does not label David\'s sins or tell how much Uriah realized."',ko:'빈틈: 독자가 누락된 내용을 채우도록 강제하고 서스펜스를 고조시키며 도덕적 참여를 강화하는 의도적으로 보류된 정보.'},
+{name:'Irony',en:'The text says one thing but means another, or the character\'s words mean more (or less) than they know. Uriah\'s speech in 2 Sam 11:11 is ironically diagnostic of David\'s situation without Uriah knowing it.',ko:'아이러니: 본문이 한 가지를 말하지만 다른 것을 의미하거나, 인물의 말이 그들이 아는 것보다 더 많은(또는 적은) 의미를 지니는 것.'},
+{name:'Leitwort',en:'Word-root repetition for literary effect. Cognates of a root word are repeated to create structural emphasis. Ruth 1: שׁוּב ("return/go back") appears seven times, creating the structural argument that Ruth\'s refusal of return overturns.',ko:'레이트보르트: 문학적 효과를 위한 어근 반복. 룻기 1장: שׁוּב("돌아가다")가 7번 등장하여 룻의 돌아가기 거부가 무너뜨리는 구조적 논증을 만듭니다.'},
+{name:'Repetition (5 Types)',en:'Alter\'s five types: (1) Leitwort (word-root), (2) Motif (concrete image used symbolically — fire in Samson), (3) Theme (idea/value as focus), (4) Sequence of actions (threefold pattern — 2 Kgs 1), (5) Type-scene (key event repeated — feedings of 5000 and 4000).',ko:'반복(5가지 유형): 레이트보르트(어근), 모티프(상징적으로 사용된 구체적 이미지), 주제(아이디어/가치 집중), 행동 시퀀스(세 겹 패턴), 유형 장면(반복되는 주요 사건).'},
+{name:'Type-Scene',en:'A key event in the life of a hero that is repeated more than once — each repetition invites comparison. The well-meeting (finding a bride at a well: Gen 24, Exod 2, John 4). Judges 17-21: scenes of anarchy become "travesties of earlier narratives."',ko:'유형 장면: 영웅의 삶에서 두 번 이상 반복되는 주요 사건 — 각 반복이 비교를 초대합니다.'},
+{name:'Chiasm/Inclusio',en:'Framing techniques: Chiasm (ABCBA pattern where the center is the theological emphasis), Inclusio (same or similar material at the beginning and end of a unit, forming a bracket that defines the unit\'s scope).',ko:'교차 배열/포함: 프레이밍 기법. 교차 배열(중심이 신학적 강조점인 ABCBA 패턴), 포함(단위의 범위를 정의하는 시작과 끝의 동일하거나 유사한 자료).'}
+];
+
+var OSB_THEMES=[
+{en:'Poetics as the Path to Meaning',ko:'의미로의 경로로서의 시학',d_en:'Osbourne\'s distinctive: "the how leads to the what." Understanding HOW the text is constructed (poetics) is the path to understanding WHAT it communicates (meaning). This reverses the intuitive approach of reading for content first.',d_ko:'오스본의 특징: "방법이 내용으로 이어집니다." 본문이 어떻게 구성되었는지(시학)을 이해하는 것이 그것이 무엇을 전달하는지(의미)를 이해하는 경로입니다.'},
+{en:'Narrative Criticism + Historical-Critical Methods',ko:'내러티브 비평 + 역사-비평적 방법',d_en:'Unlike purely literary scholars, Osbourne insists narrative criticism must be combined with source and redaction criticism. Without this correction, narrative criticism dehistoricizes the text and becomes susceptible to purely reader-centered meaning production.',d_ko:'순수 문학 학자들과 달리, 오스본은 내러티브 비평이 자료 비평 및 편집 비평과 결합되어야 한다고 주장합니다.'},
+{en:'Dynamic Character Development',ko:'역동적 인물 발전',d_en:'Osbourne\'s major contribution to OT characterization: OT major characters (Moses, David, Solomon, Elijah) are more dynamic than NT characters and change drastically. Saul from anointed king to paranoid murderer. David from covenant hero to self-serving king. The arc IS the theology.',d_ko:'오스본의 구약 인물화에 대한 주요 공헌: 구약의 주요 인물들은 신약 인물들보다 더 역동적이며 크게 변합니다.'},
+{en:'The Implied Reader as Formation Target',ko:'형성 목표로서의 암묵적 독자',d_en:'Osbourne\'s contextualization step names the formation goal: the reader is to identify with the implied reader and relive the narrative\'s drama. Not information transfer but participation and formation is the hermeneutical goal.',d_ko:'오스본의 맥락화 단계는 형성 목표를 명명합니다: 독자가 암묵적 독자와 동일시하고 내러티브의 드라마를 재경험해야 합니다.'},
+{en:'Narrative Sermon as Hermeneutical Fulfillment',ko:'해석학적 성취로서의 내러티브 설교',d_en:'The narrative sermon (step 7) is not an add-on to the hermeneutical method but its fulfillment. The method culminates in proclamation that follows the plot movements of the text — helping the congregation relive the narrative\'s tension and resolution rather than receive a didactic summary.',d_ko:'내러티브 설교(7단계)는 해석학적 방법의 추가가 아니라 그 성취입니다.'}
+];
+
+// ─── FORMATION MANUSCRIPT ─────────────────────────────────────────────────
+var FM=[
+{l:'WHERE — The Space of Hermeneutical Formation',t:'',c:`<p>The student entering BH Week 6 on OT Narrative stands in <span class="fm">BRIDGE space</span> — the Transitional Space between two worlds that cannot generate the necessary WHO without the crossing. The first world is the <strong>HOME of devotional reading</strong>: the space of sincere, immediate, self-directed Bible reading where the text speaks directly and personally. This is not an invalid space — it is a necessary beginning. But it is a space that, without formation, systematically produces the errors Fee &amp; Stuart name: moralizing, personalizing, misappropriation, redefinition.</p>
+<p>The second world is the <strong>Other World of purely critical scholarship</strong>: the space of historical distance, literary analysis, and academic method where the text is encountered as ancient document rather than living Word. This too is not the destination — a student who successfully exited HOME only to arrive in pure academic detachment has not completed the formation journey; they have traded one incomplete position for another.</p>
+<p>The both/and Transitional Space — the BRIDGE — is the only position from which genuine hermeneutical formation occurs: rigorous attention to the text's own world AND transformative encounter with the living Word. Fee &amp; Stuart and Osbourne are formation guides for this BRIDGE crossing. They do not ask you to abandon devotional reading; they ask you to refuse to let sincere devotional intent substitute for methodological accountability to what the text actually says.</p>
+<div class="triad"><div class="tr-b wh"><div class="tr-k">HOME</div><div class="tr-v">Sincere but pre-critical reading. The text speaks directly and personally. Method has not yet differentiated devotional intent from interpretive precision.</div></div><div class="tr-b wh2"><div class="tr-k">BRIDGE / Now</div><div class="tr-v">Both/and Transitional Space. Holding "I don't know yet" alongside "I want to know." The hermeneutical formation is occurring here.</div></div><div class="tr-b wt"><div class="tr-k">NEW WHO</div><div class="tr-v">The interpreter formed by emic reading — rigorous yet devotional. Can say "the text surprised me" with gratitude rather than anxiety.</div></div></div>`},
+{l:'WHO — The Interpreter in Formation',t:'',c:`<p>The student in this transition is a WHO in formation — not yet the interpreter they are becoming, no longer simply the reader they were. This is the most vulnerable formation position: <em>you know enough to be destabilized but not yet enough to be re-stabilized.</em> Fee &amp; Stuart's recognition that you have been reading the Gideon narrative wrongly for years can produce one of two responses: defensive resistance ("but God did speak to Gideon through the fleece — that's what the text says") or formative reception ("I need to learn what the text actually says before I can know what it means for me"). The first response closes the BRIDGE; the second crosses it.</p>
+<p>The WHO being formed by this week's hermeneutical encounter is an interpreter who can hold:</p>
+<ul style="margin:7px 0 7px 16px;font-size:13px;line-height:1.75"><li>Historical and literary precision in the left hand (Osbourne)</li><li>Devotional availability in the right hand (the devotional intention that Fee &amp; Stuart honor)</li><li>Without collapsing one into the other</li></ul>
+<p>This WHO does not exist in HOME (where devotional reading excludes the historical question) and does not exist at the far end of academic scholarship (where historical scholarship excludes the formational question). This WHO is <em>only constituted in the crossing</em> — in the both/and Transitional Space that Fee &amp; Stuart and Osbourne are jointly mapping. The Formation Permanence principle applies: once you have genuinely encountered the Akedah on its own terms, or the Elijah narrative without allegorizing it — you cannot un-know these things. The hermeneutical formation is irreversible. Post-Birth Irreversibility.</p>`},
+{l:'WHAT — The Vocation of Faithful Interpretation',t:'',c:`<p>The WHAT being formed here is not merely academic competence. The WHAT is a calling: <strong>to read Scripture in a way that honors both the text's original world and the community's formational need.</strong> To refuse the false choice between "devotional reading" and "critical reading." To demonstrate through practice that rigorous emic reading IS the most formative reading — because only the text encountered on its own terms can genuinely challenge and form, rather than confirm and comfort.</p>
+<p>The interpreter who has been through hermeneutical formation is equipped to:</p>
+<ul style="margin:7px 0 7px 16px;font-size:13px;line-height:1.75"><li>Encounter the text before imposing on it (Situation and Form come before Force and Faithful Embodiment)</li><li>Receive challenge from the text before defending against it (Fee &amp; Stuart's 10 principles as accountability structures)</li><li>Invite community formation through the text's own theology rather than through the interpreter's preferred application</li><li>Say with integrity: "This is what the text says" before "this is what it means for us"</li></ul>`},
+{l:'Three Justice Categories',t:'',c:`<div class="jcat"><div class="jc c1"><span class="jc-l">✗ CLOSED WOMB</span><strong>Interpretive access denied.</strong> When institutional hermeneutics closes access to what the text actually says in favor of what it is "supposed" to say. When tradition, doctrine, or denominational identity controls what the Bible can say — preventing genuine emic encounter. The history of interpretation is full of CLOSED WOMB moments: allegorical readings that prevented encounter with narrative's historical specificity; confessional readings that prevented encounter with the text's original theological claim. The institution protects its own formation at the expense of the forming person's genuine encounter.</div><div class="jc c2"><span class="jc-l">↯ PREMATURE EXPULSION</span><strong>Application before formation.</strong> When students are rushed from text to application before the emic reading has occurred. The WHAT of application cannot be formed before the WHO of the interpreter has been transformed by the WHERE of genuine textual encounter. Rushing to "what does this mean for me?" before "what did this mean for them?" enacts PREMATURE EXPULSION — displacing the student from the formation space before the new hermeneutical WHO has gestated. Fee &amp; Stuart's chapter is itself a formation guide against this error.</div><div class="jc c3"><span class="jc-l">⚡ KAIROS THEFT</span><strong>Method substitutes for meeting.</strong> When hermeneutical method becomes an end in itself. Fee &amp; Stuart's 10 principles and Osbourne's 7-step method are not obstacles to encounter with the text — they are preparation for encounter. But when method mastery becomes the goal, and genuine formative encounter with the text is displaced by academic performance, KAIROS THEFT has occurred: the method has stolen the threshold crossing that the method was designed to facilitate.</div></div>`},
+{l:'Future Self Protocol',t:'Individual + Communal',c:`<div class="fs-card"><div class="fs-l">Individual Future Self</div><div class="fs-content"><p>The interpreter who has been formed by these hermeneutical frameworks is not afraid of the text. They have learned that rigorous attention to the text's own world is not a threat to devotional encounter — it is its deepest preparation. This interpreter can say "the text surprised me" with gratitude rather than anxiety. They have been freed from having to protect their theology from Scripture, because their hermeneutical formation has taught them that the text forms rather than threatens. Post-Birth Irreversibility: once you have genuinely encountered the Akedah on its own terms, or read Naomi's lament as covenant complaint rather than apostasy — you cannot un-know these things. The hermeneutical formation is permanent.</p></div></div>
+<div class="fs-card"><div class="fs-l">Communal Future Self</div><div class="fs-content"><p>A community formed by emic reading practices can encounter the prophetic call of Scripture together — without the community needing to protect itself from what the text says. This community does not require the interpreter to pre-filter, pre-soften, or pre-apply the text to prevent disruption. It can hold: "The text says X, and X is more demanding than what we have lived." This is the prophetically-equipped hermeneutical community — formed not by what it wants the text to say but by what the text actually says in its own world, and therefore able to hear the Word that arrives from outside itself. Formation Permanence: once a community has learned to read the Bible on its own terms, the interpretive formation is communally permanent.</p></div></div>`},
+{l:'Formation Diagnostic',t:'WHERE are you as an interpreter?',c:`<p>Locate yourself in the 2×3 Matrix Field as a biblical interpreter — not as a believer or student in general, but specifically as someone who reads the Bible for formation purposes.</p>
+<div class="triad" style="margin:10px 0"><div class="tr-b wh"><div class="tr-k">HOME</div><div class="tr-v">You read the text with confident familiarity. You know what it "means." Application comes before exegesis. The text confirms what you already believe.</div></div><div class="tr-b wh2"><div class="tr-k">BRIDGE / Transitional</div><div class="tr-v">You are being asked to hold "I don't know yet" alongside "I want to know." This is the formation space where this course is operating. You are here if you are feeling the disorientation that genuine hermeneutical formation requires.</div></div><div class="tr-b wt"><div class="tr-k">EXILE / Other World</div><div class="tr-v">You have lost the devotional connection and now read the text only as academic exercise. The method has replaced the meeting. You can analyze but no longer encounter.</div></div></div>
+<p class="ms">The purpose of this course is to form interpreters who can stand in BRIDGE — holding the both/and of rigorous scholarship and devotional availability — long enough for a new WHO to form: the interpreter who can say with integrity, "Let me first understand what this text said in its own world, before I say what it means in mine."</p>
+<div style="background:var(--ink);color:#f7f5f0;border-radius:var(--r);padding:11px 13px;margin-top:11px"><p style="font-size:12.5px;color:rgba(247,245,240,.8);font-style:italic;line-height:1.7;margin-bottom:0">"The goal of hermeneutics is not to control the text but to be controlled by it — to arrive at the text without prior agendas and to leave it having been addressed by what was actually there." — The formation mandate of this course</p></div>`}
+];
+
+
+var MCQ=[
+{q:"According to Fee & Stuart, what is the primary difference between what narratives describe and what they prescribe?",opts:["A) Narratives prescribe patterns for believers to follow when historical events are repeated","B) Narratives record what happened — not necessarily what should have happened or what we ought to do","C) Narratives describe spiritual principles while prescribing specific behavioral responses","D) Narratives prescribe doctrine while describing only the cultural context of ancient Israel"],c:1,ex:["Incorrect. Fee & Stuart explicitly warn against 'monkey-see-monkey-do' reading.","Correct. Fee & Stuart's Principle 3. Narratives record historical reality, not behavioral templates.","Incorrect. This reverses the relationship.","Incorrect. Narratives generally don't prescribe doctrine."]},
+{q:"What does Osbourne mean when he says narrative meaning is found 'in a text as a whole rather than in isolated segments'?",opts:["A) The Bible should only be read in its canonical order","B) Individual verses should never be quoted without reading the entire book","C) Narrative criticism understands meaning through plot, characterization, and point of view as a unified whole","D) Only literary scholars trained in narrative criticism can properly interpret biblical narrative"],c:2,ex:["Incorrect. Osbourne's point is about literary method, not canonical sequence.","Incorrect. An extreme overstatement.","Correct. This is Osbourne's central argument: meaning emerges from the interplay of all narrative elements.","Incorrect. Osbourne's method equips all careful readers."]},
+{q:"Which of Osbourne's five dimensions of point of view involves the narrator providing 'inside information' on the thoughts and feelings of characters?",opts:["A) Evaluative/Ideological point of view","B) Psychological point of view","C) Phraseological point of view","D) Spatial point of view"],c:1,ex:["Incorrect. Evaluative point of view involves concepts of right and wrong in the narrative world.","Correct. The psychological dimension studies how the narrator provides inside information on characters' thoughts and feelings — demonstrating the narrator's omniscience.","Incorrect. Phraseological point of view relates to dialogue and speeches.","Incorrect. Spatial point of view involves the narrator's omnipresent ability to move from place to place."]},
+{q:"Fee & Stuart name nine common errors in reading OT narrative. Which error is being committed when a reader says: 'The story of Gideon's fleece teaches us a method for finding God's will today'?",opts:["A) Allegorizing","B) Decontextualizing","C) Misappropriation","D) False Combination"],c:2,ex:["Incorrect. Allegorizing involves hidden secondary meanings.","Incorrect. Decontextualizing ignores context. Related but distinct.","Correct. Fee & Stuart use the Gideon fleece as their direct example of misappropriation — using a narrative for a purpose foreign to its actual function. The narrator was showing God saved Israel despite Gideon's lack of faith.","Incorrect. False Combination involves connecting unrelated elements."]},
+{q:"How does Osbourne's 7-step method differ from Fee & Stuart's approach to OT narrative?",opts:["A) Osbourne ignores historical context while Fee & Stuart emphasize it","B) Fee & Stuart provide a prohibitive/protective framework while Osbourne provides a constructive/methodological one","C) Osbourne argues against using the Bible devotionally while Fee & Stuart support devotional reading","D) Fee & Stuart developed their approach for scholars while Osbourne wrote for general readers"],c:1,ex:["Incorrect. Osbourne explicitly insists on combining narrative criticism with historical-critical methods.","Correct. This is the key distinction. Fee & Stuart are primarily reader-protective (what NOT to do). Osbourne is text-constructive (HOW to analyze what the text is doing). Both are needed.","Incorrect. Neither scholar argues against devotional reading.","Incorrect. This is the opposite: Fee & Stuart wrote for general readers; Osbourne wrote for graduate scholars."]},
+{q:"What is Osbourne's 'Leitwort' device, and which biblical text does he use as his primary example?",opts:["A) A type-scene repeated in multiple narratives; example: the well-meeting scene in Genesis, Exodus, and John","B) Word-root repetition for literary effect; example: שׁוּב ('return/go back') in Ruth 1","C) Deliberately withheld information that forces the reader to fill in; example: David and Bathsheba (2 Sam 11)","D) A bracketing technique using the same material at beginning and end; example: the Psalms"],c:1,ex:["Incorrect. This describes type-scene.","Correct. Leitwort is Osbourne's term for word-root repetition. In Ruth 1, שׁוּב appears seven times, creating a structural argument that Ruth's refusal of return overturns.","Incorrect. This describes gap.","Incorrect. This describes inclusio/chiasm."]},
+{q:"According to the Formation Manuscript (MetaArchitect v6.5.0), which of the three justice categories describes what happens when hermeneutical method becomes an end in itself — substituting academic exercise for genuine formative encounter with the text?",opts:["A) ✗ CLOSED WOMB — interpretive access denied by institutional control","B) ↯ PREMATURE EXPULSION — application before formation has occurred","C) ⚡ KAIROS THEFT — method steals the threshold crossing it was designed to facilitate","D) None of the above — this is not a justice category but a pedagogical failure"],c:2,ex:["Incorrect. CLOSED WOMB describes institutional closure of access to what the text actually says.","Incorrect. PREMATURE EXPULSION describes rushing to application before emic reading has occurred.","Correct. KAIROS THEFT names the structural foreclosure of the irreversible threshold crossing. When method mastery substitutes for genuine encounter with the text, the method has stolen the very crossing it was designed to facilitate.","Incorrect. This IS a justice category in the MetaArchitect framework."]}
+];
+
+var FM_KO=[
+{l:'WHERE — 해석학적 형성의 공간',t:'',c:`<p>BH 6주차의 구약 내러티브로 들어오는 학생은 <span class="fm">BRIDGE 공간</span>, 곧 두 세계 사이의 전이 공간 위에 서 있습니다. 이 건넘 없이는 필요한 새로운 WHO가 생겨나지 않습니다. 첫 번째 세계는 <strong>경건한 익숙함의 HOME</strong>입니다. 본문이 직접적이고 즉각적으로 나에게 말한다고 느끼는 자리지요. 이 공간 자체가 잘못된 것은 아닙니다. 그러나 형성이 없을 때 이 공간은 Fee &amp; Stuart가 지적한 오류들—도덕화, 개인화, 오용, 재정의—를 지속적으로 낳습니다.</p><p>두 번째 세계는 <strong>순수 비평학문의 타자 세계</strong>입니다. 여기서 본문은 살아 있는 말씀이라기보다 고대 문서로 다루어집니다. 그러나 이것 역시 목적지가 아닙니다. HOME을 빠져나왔지만 차가운 학문성에만 도달했다면, 형성의 여정은 완성되지 않은 것입니다.</p><p>진정한 형성은 양자택일이 아니라 둘을 함께 붙드는 <strong>BRIDGE</strong>에서 일어납니다. 본문 고유의 세계에 대한 엄밀한 주의와 살아 계신 말씀과의 변형적 만남이 동시에 일어나는 자리입니다. Fee &amp; Stuart와 Osbourne은 바로 이 건넘의 안내자입니다. 이들은 경건한 읽기를 버리라고 요구하는 것이 아니라, 진실한 경건이 방법론적 책임을 대체하지 못하게 하라고 요청합니다.</p><div class="triad"><div class="tr-b wh"><div class="tr-k">HOME</div><div class="tr-v">진실하지만 비평 이전의 읽기. 본문이 곧장 나에게 말한다고 느낀다. 경건한 의도와 해석적 정확성이 아직 구분되지 않았다.</div></div><div class="tr-b wh2"><div class="tr-k">BRIDGE / 지금</div><div class="tr-v">‘아직 모른다’와 ‘알고 싶다’를 동시에 붙드는 전이 공간. 해석학적 형성은 바로 여기에서 일어난다.</div></div><div class="tr-b wt"><div class="tr-k">NEW WHO</div><div class="tr-v">본문의 emic 세계를 존중하면서도 경건을 잃지 않는 해석자. 본문이 자신을 놀라게 했다고 말할 수 있는 사람.</div></div></div>`},
+{l:'WHO — 형성되는 해석자',t:'',c:`<p>이 전이 속의 학생은 아직 완성되지 않았지만 이미 이전의 자리와는 다른, <strong>형성 중인 WHO</strong>입니다. 이것은 가장 취약한 자리이기도 합니다. 충분히 배워서 흔들리기 시작했지만, 아직 충분히 새롭게 안정되지는 않은 상태입니다. 예를 들어, 기드온의 양털 이야기를 수년 동안 잘못 읽어 왔다는 사실을 깨닫게 되면 두 반응 중 하나가 나옵니다. “하지만 하나님은 양털을 통해 말씀하셨잖아요”라는 방어적 저항, 혹은 “먼저 본문이 실제로 무엇을 말하는지 배워야겠다”라는 형성적 수용입니다. 첫 번째는 BRIDGE를 닫고, 두 번째는 건너게 합니다.</p><p>이번 주의 hermeneutical encounter가 형성해 내는 WHO는 다음을 함께 붙드는 사람입니다.</p><ul style="margin:7px 0 7px 16px;font-size:13px;line-height:1.75"><li>왼손에는 역사적·문학적 정밀성(Osbourne)</li><li>오른손에는 경건한 수용성(Fee &amp; Stuart가 존중하는 경건의 의도)</li><li>그러나 둘을 서로 무너뜨리지 않고 함께 유지하는 사람</li></ul><p>이 WHO는 HOME에도 없고, 순수 학문주의의 끝에도 없습니다. 오직 건너는 과정 속에서만 구성됩니다. 이것이 both/and의 전이 공간입니다. 한 번 아케다를 그 본문 자체의 결에 따라 읽고, 엘리야 이야기를 알레고리로 축소하지 않고 읽게 되면, 이전 상태로 완전히 되돌아갈 수 없습니다. 형성은 비가역적입니다. Post-Birth Irreversibility.</p>`},
+{l:'WHAT — 신실한 해석의 소명',t:'',c:`<p>여기서 형성되는 WHAT은 단순한 학문적 능력이 아닙니다. 그것은 소명입니다. 곧 <strong>본문의 원래 세계와 오늘 공동체의 형성 필요를 동시에 존중하는 방식으로 성경을 읽는 일</strong>입니다. ‘경건한 읽기’와 ‘비판적 읽기’ 사이의 거짓 이분법을 거부하는 일입니다. 본문을 본문 자신의 조건에서 만나는 읽기야말로 가장 형성적인 읽기임을 실천으로 드러내는 일입니다. 왜냐하면 그럴 때에만 본문은 나를 확인해 주는 대신 나를 도전하고 새롭게 빚을 수 있기 때문입니다.</p><p>이 형성을 거친 해석자는 다음과 같은 실천을 할 수 있습니다.</p><ul style="margin:7px 0 7px 16px;font-size:13px;line-height:1.75"><li>만나기 전에 덧씌우지 않는다. Situation과 Form이 Force와 Faithful Embodiment보다 먼저 온다.</li><li>방어하기 전에 본문으로부터 도전을 받는다. Fee &amp; Stuart의 10가지 원칙은 바로 이 책임 구조를 마련한다.</li><li>해석자의 선호하는 적용이 아니라 본문 자체의 신학을 통해 공동체의 형성을 초대한다.</li><li>‘이것이 우리에게 무엇을 뜻하는가’를 말하기 전에 ‘이 본문이 실제로 무엇을 말하는가’를 먼저 말할 수 있다.</li></ul>`},
+{l:'세 가지 정의 범주',t:'',c:`<div class="jcat"><div class="jc c1"><span class="jc-l">✗ CLOSED WOMB</span><strong>해석 접근이 닫힌 상태.</strong> 본문이 실제로 말하는 것보다, 본문이 ‘말해야만 하는 것’을 제도나 전통이 미리 결정해 버리는 상황입니다. 교리, 교단 정체성, 해석 관습이 emic 만남을 봉쇄할 때 이 범주가 발생합니다. 해석의 역사에는 이런 CLOSED WOMB가 반복되어 왔습니다.</div><div class="jc c2"><span class="jc-l">↯ PREMATURE EXPULSION</span><strong>형성 이전의 적용.</strong> 학생이 emic 읽기를 거치기도 전에 곧바로 ‘나에게 무슨 뜻인가’로 밀려나는 경우입니다. 해석자의 WHO가 본문 만남 속에서 새롭게 잉태되기 전에 WHAT의 적용만 요구되면, 형성 공간에서 너무 일찍 추방되는 셈입니다.</div><div class="jc c3"><span class="jc-l">⚡ KAIROS THEFT</span><strong>만남을 대신하는 방법.</strong> 방법 자체가 목적이 될 때 발생합니다. Fee &amp; Stuart의 원칙과 Osbourne의 7단계는 본문 만남을 위한 준비여야 하는데, 그것이 단지 학업 수행을 위한 기술이 되면 문턱을 건너야 할 kairos를 방법 자체가 빼앗아 버립니다.</div></div>`},
+{l:'미래 자기 프로토콜',t:'개인 + 공동체',c:`<div class="fs-card"><div class="fs-l">개인 미래 자기</div><div class="fs-content"><p>이 해석학적 틀로 형성된 해석자는 본문을 두려워하지 않습니다. 본문 고유의 세계를 엄밀하게 따라가는 일이 경건한 만남을 위협하는 것이 아니라 오히려 가장 깊게 준비하는 길임을 배웠기 때문입니다. 그는 ‘본문이 나를 놀라게 했다’고 불안이 아니라 감사로 말할 수 있습니다. 한 번 본문이 자기 뜻대로가 아니라 본문 자신의 조건에서 들리기 시작하면, 그 형성은 쉽게 되돌릴 수 없습니다.</p></div></div><div class="fs-card"><div class="fs-l">공동체 미래 자기</div><div class="fs-content"><p>emic 읽기로 형성된 공동체는 성경이 주는 예언자적 부름을 함께 감당할 수 있습니다. 공동체는 더 이상 본문을 미리 필터링하거나 순화해서 자신을 보호하려 하지 않습니다. 오히려 ‘본문은 이렇게 말하고, 그 말은 우리가 살아 온 것보다 더 demanding하다’고 고백할 수 있습니다. 한 공동체가 성경을 자기 욕망이 아니라 본문 자신의 결에 따라 읽는 법을 배우면, 그 형성 역시 공동체적으로 지속됩니다.</p></div></div>`},
+{l:'형성 진단',t:'해석자로서 지금 당신은 어디에 서 있는가?',c:`<p>지금 자신을 2×3 Matrix Field 안에 놓아 보십시오. 일반적인 신앙인이 아니라, <strong>본문을 형성을 위해 읽는 해석자</strong>로서의 자리입니다.</p><div class="triad" style="margin:10px 0"><div class="tr-b wh"><div class="tr-k">HOME</div><div class="tr-v">익숙함 속에서 자신 있게 읽는다. 이미 ‘뜻’을 안다고 느낀다. 적용이 주해보다 먼저 온다. 본문은 내가 이미 믿는 것을 확인해 준다.</div></div><div class="tr-b wh2"><div class="tr-k">BRIDGE / 전이 공간</div><div class="tr-v">‘아직 모른다’와 ‘알고 싶다’를 동시에 붙드는 자리. 본 과목이 여러분을 두는 형성 공간이 바로 이곳이다. 진정한 해석학적 형성이 요구하는 방향 상실감이 느껴진다면, 지금 여기에 있는 것이다.</div></div><div class="tr-b wt"><div class="tr-k">EXILE / 타자 세계</div><div class="tr-v">경건한 연결을 잃고, 본문을 오직 학문적 과제로만 읽게 된 상태. 방법이 만남을 대체했다. 분석은 가능하지만 더 이상 encounter는 일어나지 않는다.</div></div></div><p class="ms">이 과목의 목적은 엄밀한 학문성과 경건한 개방성을 동시에 붙드는 BRIDGE에 충분히 오래 서 있을 수 있는 해석자를 형성하는 데 있습니다. 그때 새로운 WHO가 형성됩니다. 곧 ‘먼저 이 본문이 그들의 세계에서 무엇을 말했는지를 이해한 뒤, 비로소 나의 세계에서 무슨 뜻인지 말하겠다’고 정직하게 말할 수 있는 해석자입니다.</p><div style="background:var(--ink);color:#f7f5f0;border-radius:var(--r);padding:11px 13px;margin-top:11px"><p style="font-size:12.5px;color:rgba(247,245,240,.8);font-style:italic;line-height:1.7;margin-bottom:0">“해석학의 목표는 본문을 통제하는 것이 아니라 본문에 의해 통제되는 것이다. 미리 정해진 의제를 들고 들어가는 것이 아니라, 실제로 거기에 있었던 것에 의해 말을 듣고 나오는 것이다.”</p></div>`}
+];
+
+
+var MCQ_KO=[
+{q:'Fee & Stuart에 따르면 내러티브가 “묘사하는 것”과 “규범화하는 것”의 핵심 차이는 무엇입니까?',opts:['A) 역사적 사건이 반복될 때 신자가 따라야 할 패턴을 내러티브가 규정한다','B) 내러티브는 일어난 일을 기록하지만, 그것이 반드시 일어나야 할 일이나 우리가 해야 할 일을 곧장 명령하는 것은 아니다','C) 내러티브는 영적 원리를 묘사하고, 구체적 행동을 규범화한다','D) 내러티브는 교리를 규정하고, 고대 이스라엘의 문화적 배경만 묘사한다'],c:1,ex:['오답입니다. Fee & Stuart는 바로 이런 “보고 따라 하기”식 읽기를 경계합니다.','정답입니다. 이것이 Fee & Stuart의 제3원칙입니다. 내러티브는 역사적 현실을 기록하지, 행동 템플릿을 직접 제공하지 않습니다.','오답입니다. 관계를 뒤집어 이해했습니다.','오답입니다. 내러티브는 일반적으로 교리를 직접 규정하지 않습니다.']},
+{q:'Osbourne이 “내러티브의 의미는 고립된 단락이 아니라 본문 전체 안에서 발견된다”고 말할 때 뜻하는 바는 무엇입니까?',opts:['A) 성경은 반드시 정경의 순서대로만 읽어야 한다','B) 한 절이라도 인용하려면 항상 책 전체를 먼저 읽어야 한다','C) 내러티브의 의미는 플롯, 인물화, 관점 등 모든 요소의 상호작용 속에서 형성된다는 뜻이다','D) 내러티브 비평 훈련을 받은 문학 전문가만 성경 내러티브를 해석할 수 있다는 뜻이다'],c:2,ex:['오답입니다. Osbourne의 논점은 정경 순서가 아니라 문학적 읽기 방식에 있습니다.','오답입니다. 지나치게 확대된 진술입니다.','정답입니다. 이것이 Osbourne의 중심 주장입니다. 의미는 내러티브 요소들의 상호작용 안에서 생겨납니다.','오답입니다. Osbourne의 방법은 신중한 독자 모두에게 도구를 제공합니다.']},
+{q:'Osbourne의 관점(point of view) 다섯 차원 가운데, 화자가 인물의 생각과 감정에 대한 “내부 정보”를 제공하는 차원은 무엇입니까?',opts:['A) 평가적/이데올로기적 관점','B) 심리적 관점','C) 언어적 관점','D) 공간적 관점'],c:1,ex:['오답입니다. 평가적 관점은 이야기 세계 안의 옳고 그름의 가치 체계와 관련됩니다.','정답입니다. 심리적 차원은 화자가 인물의 생각과 감정에 대한 내부 정보를 제공하는 방식을 다룹니다.','오답입니다. 언어적 관점은 대화와 연설의 방식과 관련됩니다.','오답입니다. 공간적 관점은 화자의 이동성과 장면 포괄성과 관련됩니다.']},
+{q:'Fee & Stuart가 말한 구약 내러티브 읽기의 9가지 일반적 오류 중, “기드온의 양털 이야기는 오늘날 하나님의 뜻을 찾는 방법을 가르쳐 준다”고 말할 때 범하는 오류는 무엇입니까?',opts:['A) 알레고리화','B) 탈맥락화','C) 오용(misappropriation)','D) 거짓 조합'],c:2,ex:['오답입니다. 알레고리화는 숨겨진 2차 의미를 찾는 것입니다.','오답입니다. 탈맥락화와 관련되지만, 보다 정확한 명칭이 있습니다.','정답입니다. Fee & Stuart는 바로 기드온의 양털을 오용의 대표적 사례로 듭니다. 이 내러티브의 핵심은 기드온의 불신앙에도 불구하고 하나님이 이스라엘을 구원하셨다는 데 있습니다.','오답입니다. 거짓 조합은 직접 연결되지 않은 요소들을 억지로 묶는 것입니다.']},
+{q:'Osbourne의 7단계 방법은 Fee & Stuart의 접근과 어떻게 다릅니까?',opts:['A) Osbourne은 역사적 맥락을 무시하고, Fee & Stuart만 그것을 강조한다','B) Fee & Stuart는 주로 금지적·보호적 틀을 제공하고, Osbourne은 건설적·방법론적 틀을 제공한다','C) Osbourne은 경건한 읽기에 반대하고, Fee & Stuart는 경건한 읽기를 지지한다','D) Fee & Stuart는 학자를 위해 썼고, Osbourne은 일반 독자를 위해 썼다'],c:1,ex:['오답입니다. Osbourne은 오히려 역사비평과의 결합을 강조합니다.','정답입니다. 이것이 가장 중요한 차이입니다. Fee & Stuart는 무엇을 하지 말아야 하는지를 통해 독자를 보호하고, Osbourne은 본문을 어떻게 분석할지에 대한 건설적 방법을 제시합니다.','오답입니다. 어느 쪽도 경건한 읽기 자체를 부정하지 않습니다.','오답입니다. 실제로는 그 반대에 가깝습니다.']},
+{q:'Osbourne이 말하는 Leitwort는 무엇이며, 그 대표 사례로 어떤 본문을 제시합니까?',opts:['A) 여러 내러티브에 반복되는 유형 장면이며, 예는 우물가 만남 장면이다','B) 문학적 효과를 위한 어근 반복이며, 대표 예는 룻기 1장의 שׁוּב(“돌아가다”)이다','C) 독자가 공백을 메우도록 만드는 의도적 정보 보류이며, 예는 삼하 11장이다','D) 단락의 처음과 끝을 같은 소재로 묶는 포괄 구조이며, 예는 시편이다'],c:1,ex:['오답입니다. 이것은 유형 장면(type-scene)의 설명입니다.','정답입니다. Leitwort는 어근 반복을 의미하며, Osbourne은 룻기 1장에서 שׁוּב가 일곱 번 반복되는 예를 대표로 듭니다.','오답입니다. 이것은 gap의 설명입니다.','오답입니다. 이것은 inclusio 혹은 chiasm에 더 가깝습니다.']},
+{q:'Formation Manuscript(MetaArchitect v6.5.0)에서, 해석학적 방법이 그 자체로 목적이 되어 본문과의 실제 만남을 가로막을 때 이를 무엇이라고 부릅니까?',opts:['A) ✗ CLOSED WOMB — 제도적 통제가 해석 접근을 닫는 상태','B) ↯ PREMATURE EXPULSION — 형성 이전에 적용으로 밀려나는 상태','C) ⚡ KAIROS THEFT — 방법이 본래 열어 주어야 할 문턱 건넘을 빼앗는 상태','D) 해당 없음 — 이것은 정의 범주가 아니라 단순한 교육 실패다'],c:2,ex:['오답입니다. CLOSED WOMB는 본문이 실제로 말하는 것에 대한 접근이 제도적으로 차단되는 경우입니다.','오답입니다. PREMATURE EXPULSION은 emic 읽기 이전에 적용으로 성급히 이동하는 경우입니다.','정답입니다. KAIROS THEFT는 방법 숙달이 본문과의 실제 만남을 대신하면서, 원래 방법이 열어 주어야 할 전이의 순간을 훔쳐 가는 상태를 가리킵니다.','오답입니다. 이것은 MetaArchitect 안에서 분명한 정의 범주로 제시됩니다.']}
+];
+
+var sel={},done=false;
+
+function init(){
+// Fee manuscripts
+document.getElementById('ms-fee-en').innerHTML=FEE_MS;
+document.getElementById('ms-fee-ko').innerHTML=FEE_MS_KO;
+// Osbourne
+document.getElementById('ms-osb-en').innerHTML=OSB_MS;
+document.getElementById('ms-osb-ko').innerHTML=OSB_MS_KO;
+// Fee chapter outline
+var h='';
+FEE_OUTLINE.forEach(function(r){h+='<div class="ol-row"><span class="ol-v">'+r.v+'</span><div class="ol-c"><span class="en-s">'+r.en+'</span><span class="ko-s" style="display:none">'+r.ko+'</span></div></div>';});
+document.getElementById('ol-fee').innerHTML=h;
+// Osbourne outline
+h='';
+OSB_OUTLINE.forEach(function(r){h+='<div class="ol-row"><span class="ol-v">'+r.v+'</span><div class="ol-c"><span class="en-s">'+r.en+'</span><span class="ko-s" style="display:none">'+r.ko+'</span></div></div>';});
+document.getElementById('ol-osb').innerHTML=h;
+// Fee principles
+h='';
+FEE_PRINCIPLES.forEach(function(p){h+='<div class="pr-row"><span class="pr-n">P'+p.n+'</span><div class="pr-t"><span class="en-s">'+p.en+'</span><span class="ko-s" style="display:none">'+p.ko+'</span></div></div>';});
+document.getElementById('pr-fee').innerHTML=h;
+// Fee errors
+h='';
+FEE_ERRORS.forEach(function(e){h+='<div class="err-row"><div class="err-name">'+e.name+'</div><div class="err-desc"><span class="en-s">'+e.en+'</span><span class="ko-s" style="display:none">'+e.ko+'</span></div></div>';});
+document.getElementById('err-fee').innerHTML=h;
+// Fee themes
+h='';
+FEE_THEMES.forEach(function(t){h+='<div class="th-card"><div class="th-t"><span class="en-s">'+t.en+'</span><span class="ko-s" style="display:none">'+t.ko+'</span></div><div class="th-d"><span class="en-s">'+t.d_en+'</span><span class="ko-s" style="display:none">'+t.d_ko+'</span></div></div>';});
+document.getElementById('th-fee').innerHTML=h;
+// Osbourne method
+h='';
+OSB_METHOD.forEach(function(m){h+='<div class="pr-row"><span class="pr-n osb">'+m.n+'</span><div class="pr-t"><span class="en-s">'+m.en+'</span><span class="ko-s" style="display:none">'+m.ko+'</span></div></div>';});
+document.getElementById('method-osb').innerHTML=h;
+// Osbourne devices
+h='';
+OSB_DEVICES.forEach(function(d){h+='<div class="err-row"><div class="err-name" style="color:var(--c-osb)">'+d.name+'</div><div class="err-desc"><span class="en-s">'+d.en+'</span><span class="ko-s" style="display:none">'+d.ko+'</span></div></div>';});
+document.getElementById('dev-osb').innerHTML=h;
+// Osbourne themes
+h='';
+OSB_THEMES.forEach(function(t){h+='<div class="th-card"><div class="th-t osb"><span class="en-s">'+t.en+'</span><span class="ko-s" style="display:none">'+t.ko+'</span></div><div class="th-d"><span class="en-s">'+t.d_en+'</span><span class="ko-s" style="display:none">'+t.d_ko+'</span></div></div>';});
+document.getElementById('th-osb').innerHTML=h;
+// Formation Manuscript
+h='';
+FM.forEach(function(sec){
+h+='<div class="fm-sec"><div class="fm-l">'+sec.l+'</div>';
+if(sec.t)h+='<div class="fm-t">'+sec.t+'</div>';
+h+='<div class="fm-content">'+sec.c+'</div></div>';
+});
+document.getElementById('fm-content').innerHTML=h;
+// MCQ
+buildMCQ();
+updatePlaceholders();
+}
+
+
+function renderFM(){
+var arr = LANG==='ko' ? FM_KO : FM;
+var h='';
+arr.forEach(function(sec){
+h+='<div class="fm-sec"><div class="fm-l">'+sec.l+'</div>';
+if(sec.t)h+='<div class="fm-t">'+sec.t+'</div>';
+h+='<div class="fm-content">'+sec.c+'</div></div>';
+});
+document.getElementById('fm-content').innerHTML=h;
+}
+
+
+function buildMCQ(){
+var data = LANG==='ko' ? MCQ_KO : MCQ;
+var h='';
+data.forEach(function(q,i){
+h+='<div class="mc"><div class="mn">Q'+(i+1)+' / 7</div><div class="mq">'+q.q+'</div>';
+q.opts.forEach(function(o,j){
+h+='<div class="mo'+(sel[i]===j?' sel':'')+(done&&j===q.c?' cor':'')+(done&&sel[i]===j&&j!==q.c?' wrg':'')+'" id="o'+i+'_'+j+'" onclick="pick('+i+','+j+')"><span class="ol-l">'+String.fromCharCode(65+j)+')</span><span>'+o.substring(3)+'</span></div>';
+if(done&&(j===q.c||(sel[i]!==undefined&&j===sel[i]))){h+='<div class="ex sh">'+q.ex[j]+'</div>';}
+});
+h+='</div>';
+});
+document.getElementById('mcq-wrap').innerHTML=h;
+}
+
+function pick(i,j){if(done)return;sel[i]=j;buildMCQ();}
+function subMCQ(){if(done)return;done=true;buildMCQ();var data=LANG==='ko'?MCQ_KO:MCQ;var s=0;data.forEach(function(q,i){if(sel[i]===q.c)s++;});var sd=document.getElementById('sc-d');sd.textContent=LANG==='ko'?'점수: '+s+'/7':'Score: '+s+'/7';sd.classList.add('sh');}
+function rstMCQ(){done=false;sel={};buildMCQ();document.getElementById('sc-d').classList.remove('sh');}
+function tog(h){h.parentElement.classList.toggle('op');}
+function togSub(h){h.parentElement.classList.toggle('op');}
+function showTab(n){
+document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+document.getElementById('panel-'+n).classList.add('on');
+var names=['ori','fee','osb','ci','fm','cl','mcq'];
+document.querySelectorAll('.tbar .tb').forEach(function(tb,j){tb.classList.toggle('on',j===names.indexOf(n));});
+if(LANG==='ko'&&(n==='fee'||n==='osb'))translateIfNeeded(n);
+}
+
+function translateIfNeeded(k){
+var elId='ms-'+k+'-ko';
+var el=document.getElementById(elId);
+if(!el)return;
+if(k==='fee') el.innerHTML=FEE_MS_KO;
+if(k==='osb') el.innerHTML=OSB_MS_KO;
+}
+
+
+function updatePlaceholders(){
+var arr=[
+{en:'My assessment...',ko:'나의 평가를 적으세요...'},
+{en:"Fee & Stuart's most important principle is...",ko:'Fee & Stuart의 가장 중요한 원칙은 ...입니다.'},
+{en:'The error I have committed is [error name] when reading [text]. The text actually communicates...',ko:'제가 범한 오류는 [오류 이름]이며, [본문]을 읽을 때 나타났습니다. 이 본문은 실제로 ...을 전달합니다.'},
+{en:'Osbourne means...',ko:'Osbourne의 의미는 ...입니다.'},
+{en:'The primary difference is...',ko:'가장 핵심적인 차이는 ...입니다.'},
+{en:'I stand at [position] because...',ko:'저는 [위치]에 서 있습니다. 왜냐하면 ...'}
+];
+var tas=document.querySelectorAll('textarea');
+tas.forEach(function(t,i){ if(arr[i]) t.placeholder = LANG==='ko' ? arr[i].ko : arr[i].en; });
+}
+
+function setLang(l){
+LANG=l;
+document.getElementById('bEn').classList.toggle('on',l==='en');
+document.getElementById('bKo').classList.toggle('on',l==='ko');
+document.querySelectorAll('.en-s').forEach(function(e){e.style.display=l==='en'?'inline':'none';});
+document.querySelectorAll('.ko-s').forEach(function(e){e.style.display=l==='ko'?'inline':'none';});
+document.querySelectorAll('.lang-en-only').forEach(function(e){e.style.display=l==='en'?'':'none';});
+document.querySelectorAll('.lang-ko-only').forEach(function(e){e.style.display=l==='ko'?'':'none';});
+if(l==='ko'){
+translateIfNeeded('fee');
+translateIfNeeded('osb');
+}
+renderFM();
+buildMCQ();
+updatePlaceholders();
+}
+
+
+init();
+setLang('en');
+</script>
+</body>
+</html>
